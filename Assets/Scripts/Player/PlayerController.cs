@@ -9,24 +9,46 @@ namespace TOGETHER.Player
 
     public class PlayerController : MonoBehaviour
     {
+        #region Inspector Fields
+
         [Header("Speed settings")]
         [Space(10)]
         [SerializeField] private float _speedPlayerMovement;
+        [Space]
+        [SerializeField] private float _runIncrement;
         [SerializeField] private float _rotationSpeed;
+        #endregion
+
+        #region Fields
 
         private Rigidbody _rigidbodyPlayer;
+        private bool _isRunning;
+        private float _currentSpeed;
+        #endregion
+
+        #region Events
 
         public event Action<float> OnPlayerIsMoving;
+        public event Action<bool> OnPlayerIsRunning;
+        #endregion
+
+        #region Unity Methods
 
         private void Awake()
         {
             _rigidbodyPlayer = GetComponent<Rigidbody>();
+            _currentSpeed = _speedPlayerMovement;
         }
 
         private void Update()
         {
+            RunningControl();
             Movement();
         }
+
+        #endregion
+
+        #region Private Methods
 
         private void Movement()
         {
@@ -34,7 +56,7 @@ namespace TOGETHER.Player
             float inputX = Input.GetAxis("Horizontal");
             float inputZ = Input.GetAxis("Vertical");
             Vector3 inputMovement = new Vector3(inputX, 0, inputZ);
-            Vector3 playerMovement = inputMovement.normalized * _speedPlayerMovement;
+            Vector3 playerMovement = inputMovement.normalized * _currentSpeed;
 
             //The movmement of player here
             _rigidbodyPlayer.linearVelocity = new Vector3(playerMovement.x, _rigidbodyPlayer.linearVelocity.y, playerMovement.z);
@@ -52,5 +74,13 @@ namespace TOGETHER.Player
                 OnPlayerIsMoving?.Invoke(inputMovement.magnitude);
         }
 
+        private void RunningControl()
+        {
+            _isRunning = Input.GetKey(KeyCode.Space);
+
+            _currentSpeed = _isRunning ? _speedPlayerMovement * _runIncrement : _speedPlayerMovement;
+            OnPlayerIsRunning?.Invoke(_isRunning);
+        }
+        #endregion
     }
 }

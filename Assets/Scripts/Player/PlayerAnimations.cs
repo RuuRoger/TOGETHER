@@ -4,8 +4,13 @@ namespace TOGETHER.Player
 {
     public class PlayerAnimations : MonoBehaviour
     {
+        #region Fields
+
         private Animator _animator;
         private PlayerController _playerController;
+        #endregion
+
+        #region Unity Methods
 
         private void Awake()
         {
@@ -16,12 +21,18 @@ namespace TOGETHER.Player
         private void OnEnable()
         {
             _playerController.OnPlayerIsMoving += UpdateAnimation;
+            _playerController.OnPlayerIsRunning += UpdateRunningAnimation;
         }
 
         private void OnDisable()
         {
             _playerController.OnPlayerIsMoving -= UpdateAnimation;
+            _playerController.OnPlayerIsRunning -= UpdateRunningAnimation;
         }
+
+        #endregion
+
+        #region Private Methods
 
         private void UpdateAnimation(float actionValue)
         {
@@ -30,6 +41,14 @@ namespace TOGETHER.Player
             else
                 _animator.SetFloat("Walk", 0f);
         }
+
+        private void UpdateRunningAnimation(bool isRunning)
+        {
+            _animator.SetBool("Run", isRunning);
+        }
+
+
+        #endregion
     }
 }
 
