@@ -4,10 +4,19 @@ namespace TOGETHER.Camera
 {
     public class CameraFollow : MonoBehaviour
     {
+        #region Serialized Fields
+
+        [Header("Camera Follow Settings")]
+        [Space(10)]
         [SerializeField] private Transform _target;
+        [Space]
         [SerializeField] private float _smoothSpeed;
 
         private Vector3 _offset;
+
+        #endregion
+
+        #region Unity Methods
 
         private void Awake()
         {
@@ -20,5 +29,7 @@ namespace TOGETHER.Camera
             Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, _smoothSpeed * Time.deltaTime);
             transform.position = smoothedPosition;
         }
+
+        #endregion
     }
 }
