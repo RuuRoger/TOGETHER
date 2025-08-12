@@ -451,9 +451,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3402305891407841116}
+  - component: {fileID: 4203687711656398374}
   - component: {fileID: 120674175278399982}
   - component: {fileID: 9003410764456430701}
-  - component: {fileID: 4203687711656398374}
   m_Layer: 0
   m_Name: Dog_001
   m_TagString: Untagged
@@ -478,6 +478,30 @@ Transform:
   - {fileID: 3946947937595085479}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4203687711656398374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2629182449500102118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be2f4aa750c530144bd7219a00354c98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_WalkSpeed: 1
+  m_RunSpeed: 4
+  m_RotateSpeed: 245
+  m_Space: 1
+  m_JumpHeight: 5
+  m_VerticalID: Vert
+  m_StateID: State
+  m_LookWeight:
+    weight: 1
+    body: 0.3
+    head: 0.7
+    eyes: 1
 --- !u!143 &120674175278399982
 CharacterController:
   m_ObjectHideFlags: 0
@@ -525,30 +549,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4203687711656398374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2629182449500102118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be2f4aa750c530144bd7219a00354c98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_WalkSpeed: 1
-  m_RunSpeed: 4
-  m_RotateSpeed: 245
-  m_Space: 1
-  m_JumpHeight: 5
-  m_VerticalID: Vert
-  m_StateID: State
-  m_LookWeight:
-    weight: 1
-    body: 0.3
-    head: 0.7
-    eyes: 1
 --- !u!1 &2735724662372591797
 GameObject:
   m_ObjectHideFlags: 0
