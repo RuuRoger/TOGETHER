@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3960091141323773949}
   - component: {fileID: 8268277512994686783}
-  - component: {fileID: 4457537819593558465}
   m_Layer: 0
   m_Name: Partner Zone
   m_TagString: Untagged
@@ -54,18 +53,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3, y: 1, z: 3}
   m_Center: {x: 0, y: 0, z: 0.008427262}
---- !u!114 &4457537819593558465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 648504755360971995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8811387a05453f44ea1b7473f3669ceb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7940719953895527930
 GameObject:
   m_ObjectHideFlags: 0
