@@ -5,11 +5,25 @@ namespace TOGETHER.Assets.Scripts.Dog
 {
     public class DogController : MonoBehaviour
     {
+        #region Serilizable fields
+
+        [Header("Settings to Walk")]
+        [Space(10)]
+        [SerializeField] private float _stopDistance;
+        [Space]
         [SerializeField] private Transform _idleZone;
+
+        #endregion
+
+        #region private fields
+
         private NavMeshAgent _dogNavMesh;
         private Animator _animatorDog;
-        [SerializeField] private float _stopDistance;
         private bool _isStopped;
+
+        #endregion
+
+        #region Unity Methods
 
         private void Awake()
         {
@@ -22,6 +36,10 @@ namespace TOGETHER.Assets.Scripts.Dog
         {
             MoveDog();
         }
+
+        #endregion
+
+        #region  Private Methods
 
         private void MoveDog()
         {
@@ -45,5 +63,6 @@ namespace TOGETHER.Assets.Scripts.Dog
             }
         }
     
+        #endregion
     }
 }
