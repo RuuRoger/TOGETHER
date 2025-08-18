@@ -57,10 +57,11 @@ namespace TOGETHER.Assets.Scripts.Dog
                 if (!_isStopped)
                 {
                     _dogNavMesh.isStopped = true;
-                    _animatorDog.SetBool("IsWalking", false);
                     _isStopped = true;
                 }
             }
+
+            _animatorDog.SetBool("IsWalking", _dogNavMesh.velocity.magnitude > 0.05f);
         }
     
         #endregion
