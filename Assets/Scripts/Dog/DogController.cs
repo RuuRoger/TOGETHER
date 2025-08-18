@@ -1,6 +1,3 @@
-using System.Collections;
-using TOGETHER.Assets.Scripts.Player;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,65 +5,44 @@ namespace TOGETHER.Assets.Scripts.Dog
 {
     public class DogController : MonoBehaviour
     {
-        [SerializeField] private Collider _idleZone;
-        [SerializeField] private DogInCollider _colliderToMove;
+        [SerializeField] private Transform _idleZone;
         private NavMeshAgent _dogNavMesh;
         private Animator _animatorDog;
-        private bool _isInside;
+        [SerializeField] private float _stopDistance;
+        private bool _isStopped;
 
         private void Awake()
         {
             _dogNavMesh = GetComponent<NavMeshAgent>();
             _animatorDog = GetComponent<Animator>();
-            _isInside = false;
+            _isStopped = false;
         }
 
-        private void Start()
+        private void Update()
         {
-            SetInside(false);
+            MoveDog();
         }
 
-        private void OnEnable()
+        private void MoveDog()
         {
-            _colliderToMove.OnInsideZone += OnDogEnterZone;
-            _colliderToMove.OnOutZone += OnDogExitZone;
-        }
+            float distance = Vector3.Distance(transform.position, _idleZone.position);
 
-        private void OnDisable()
-        {
-            _colliderToMove.OnInsideZone -= OnDogEnterZone;
-            _colliderToMove.OnOutZone -= OnDogExitZone;
-        }
-
-        private void OnDogEnterZone() => SetInside(true);
-        private void OnDogExitZone() => SetInside(false);
-
-        public void SetInside(bool inside)
-        {
-            _isInside = inside;
-            MoveToIdleZone();
-        }
-
-        private void MoveToIdleZone()
-        {
-            if (!_isInside)
-                StartCoroutine(StartMovingWithDelay());
+            if (distance > _stopDistance)
+            {
+                _dogNavMesh.isStopped = false;
+                _dogNavMesh.SetDestination(_idleZone.position);
+                _animatorDog.SetBool("IsWalking", true);
+                _isStopped = false;
+            }
             else
-                StartCoroutine(MakeDelayInMovment());
-        }
-
-        private IEnumerator StartMovingWithDelay()
-        {
-            yield return new WaitForSeconds(0.5f);
-            _dogNavMesh.SetDestination(_idleZone.transform.position);
-            _animatorDog.SetBool("IsWalking", true);
-        }
-
-        private IEnumerator MakeDelayInMovment()
-        {
-            yield return new WaitForSeconds(0.2f);
-            _dogNavMesh.ResetPath();
-            _animatorDog.SetBool("IsWalking", false);
+            {
+                if (!_isStopped)
+                {
+                    _dogNavMesh.isStopped = true;
+                    _animatorDog.SetBool("IsWalking", false);
+                    _isStopped = true;
+                }
+            }
         }
     
     }
