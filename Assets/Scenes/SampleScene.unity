@@ -8999,8 +8999,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddaca631de367c648870676403535b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _idleZone: {fileID: 1631704905}
-  _colliderToMove: {fileID: 1631704903}
+  _stopDistance: 3
+  _idleZone: {fileID: 1631704906}
 --- !u!4 &797487850 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4956255927207046, guid: c04be9f92ebf58b46b2204ac3aaa8785, type: 3}
@@ -12614,6 +12614,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4457537819593558465, guid: 6a3c3c37133b6ae4d9590995c8166d88, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5251107426523682287, guid: 6a3c3c37133b6ae4d9590995c8166d88, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -20417,20 +20421,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1884685982}
   m_SourcePrefab: {fileID: 100100000, guid: c04be9f92ebf58b46b2204ac3aaa8785, type: 3}
---- !u!114 &1631704903 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4457537819593558465, guid: 6a3c3c37133b6ae4d9590995c8166d88, type: 3}
-  m_PrefabInstance: {fileID: 1064743953}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8811387a05453f44ea1b7473f3669ceb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &1631704905 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 8268277512994686783, guid: 6a3c3c37133b6ae4d9590995c8166d88, type: 3}
+--- !u!4 &1631704906 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3960091141323773949, guid: 6a3c3c37133b6ae4d9590995c8166d88, type: 3}
   m_PrefabInstance: {fileID: 1064743953}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1633350265
