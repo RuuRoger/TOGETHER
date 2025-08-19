@@ -8,3 +8,7 @@ A 3D top-down adventure game, where you explore a world with your character and 
 Take a look at my devlog about this project!
 
 https://ruuroger.itch.io/together/devlog/1003567/first-steps
+
+### Project Status ✅
+
+This project is currently **In progress**.
