@@ -1,6 +1,7 @@
 <center>
   <h1>👨‍🦱🐕 ASP.NET Core Project with an Existing SQL Server Database</h1>
 </center>
+
 ## 📝 Description
 
 A 3D top-down adventure game, where you explore a world with your character and their faithful canine companion. The main objective is to offer an experience of exploration and collaboration between the player and their dog.
