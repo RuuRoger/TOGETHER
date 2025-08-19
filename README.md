@@ -1,4 +1,4 @@
-<h1 align="center">👨‍🦱🐕 TOGETHER</h1>
+<h1 align="center">👨‍🦱🐕 TOGETHER 🎮</h1>
 
 
 ## 📝 Description
