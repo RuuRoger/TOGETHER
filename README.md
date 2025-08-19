@@ -1,5 +1,5 @@
 <center>
-  <h1>👨‍🦱🐕 ASP.NET Core Project with an Existing SQL Server Database</h1>
+  <h1>👨‍🦱🐕 TOGETHER</h1>
 </center>
 
 ## 📝 Description
