@@ -9,6 +9,6 @@ Take a look at my devlog about this project!
 
 https://ruuroger.itch.io/together/devlog/1003567/first-steps
 
-### Project Status ✅
+## Project Status ✅
 
 This project is currently **In progress**.
