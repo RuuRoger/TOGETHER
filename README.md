@@ -1,6 +1,5 @@
-<center>
-  <h1>👨‍🦱🐕 TOGETHER</h1>
-</center>
+<h1 align="center">👨‍🦱🐕 TOGETHER</h1>
+
 
 ## 📝 Description
 
