@@ -9,27 +9,28 @@ namespace TOGETHER.Assets.Scripts.Dog
 
         [Header("Settings to Walk")]
         [Space(10)]
-        [SerializeField] private float _stopDistance;
+        [SerializeField] private float m_stopDistance;
         [Space]
-        [SerializeField] private Transform _idleZone;
+        [SerializeField] private Transform m_idleZone;
 
         #endregion
 
         #region private fields
 
-        private NavMeshAgent _dogNavMesh;
-        private Animator _animatorDog;
-        private bool _isStopped;
+        private NavMeshAgent m_dogNavMesh;
+        private Animator m_animatorDog;
+        private bool m_isStopped;
 
         #endregion
+
 
         #region Unity Methods
 
         private void Awake()
         {
-            _dogNavMesh = GetComponent<NavMeshAgent>();
-            _animatorDog = GetComponent<Animator>();
-            _isStopped = false;
+            m_dogNavMesh = GetComponent<NavMeshAgent>();
+            m_animatorDog = GetComponent<Animator>();
+            m_isStopped = false;
         }
 
         private void Update()
@@ -43,25 +44,25 @@ namespace TOGETHER.Assets.Scripts.Dog
 
         private void MoveDog()
         {
-            float distance = Vector3.Distance(transform.position, _idleZone.position);
+            float distance = Vector3.Distance(transform.position, m_idleZone.position);
 
-            if (distance > _stopDistance)
+            if (distance > m_stopDistance)
             {
-                _dogNavMesh.isStopped = false;
-                _dogNavMesh.SetDestination(_idleZone.position);
-                _animatorDog.SetBool("IsWalking", true);
-                _isStopped = false;
+                m_dogNavMesh.isStopped = false;
+                m_dogNavMesh.SetDestination(m_idleZone.position);
+                m_animatorDog.SetBool("IsWalking", true);
+                m_isStopped = false;
             }
             else
             {
-                if (!_isStopped)
+                if (!m_isStopped)
                 {
-                    _dogNavMesh.isStopped = true;
-                    _isStopped = true;
+                    m_dogNavMesh.isStopped = true;
+                    m_isStopped = true;
                 }
             }
 
-            _animatorDog.SetBool("IsWalking", _dogNavMesh.velocity.magnitude > 0.05f);
+            m_animatorDog.SetBool("IsWalking", m_dogNavMesh.velocity.magnitude > 0.05f);
         }
     
         #endregion
