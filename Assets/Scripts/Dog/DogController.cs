@@ -9,8 +9,6 @@ namespace TOGETHER.Assets.Scripts.Dog
 
         [Header("Settings to Walk")]
         [Space(10)]
-        [SerializeField] private float m_stopDistance;
-        [Space]
         [SerializeField] private Transform m_idleZone;
 
         #endregion
@@ -46,7 +44,7 @@ namespace TOGETHER.Assets.Scripts.Dog
         {
             float distance = Vector3.Distance(transform.position, m_idleZone.position);
 
-            if (distance > m_stopDistance)
+            if (distance > m_dogNavMesh.stoppingDistance)
             {
                 m_dogNavMesh.isStopped = false;
                 m_dogNavMesh.SetDestination(m_idleZone.position);
