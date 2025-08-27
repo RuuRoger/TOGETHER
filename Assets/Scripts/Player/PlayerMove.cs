@@ -80,7 +80,7 @@ namespace TOGETHER.Player
 
             _currentSpeed = _isRunning ? _speedPlayerMovement * _runIncrement : _speedPlayerMovement;
             OnPlayerIsRunning?.Invoke(_isRunning);
-        }
+            }
 
         #endregion
     }
