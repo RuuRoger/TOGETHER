@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 namespace TOGETHER.Assets.Scripts.Dog
 {
-    public class DogController : MonoBehaviour
+    public class DogMovement : MonoBehaviour
     {
         #region Serilizable fields
 
