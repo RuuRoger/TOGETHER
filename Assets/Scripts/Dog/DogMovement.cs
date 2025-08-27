@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace TOGETHER.Assets.Scripts.Dog
 {
+    [RequireComponent(typeof(NavMeshAgent))]
+
     public class DogMovement : MonoBehaviour
     {
         #region Serilizable fields
@@ -16,29 +19,31 @@ namespace TOGETHER.Assets.Scripts.Dog
         #region private fields
 
         private NavMeshAgent m_dogNavMesh;
-        private Animator m_animatorDog;
         private bool m_isStopped;
+        private bool m_isMoving;
 
         #endregion
 
+        #region Events
 
-        #region Unity Methods
+        public event Action<bool> OnDogisMoving;
+
+        #endregion
+
+        #region Private Methods
 
         private void Awake()
         {
             m_dogNavMesh = GetComponent<NavMeshAgent>();
-            m_animatorDog = GetComponent<Animator>();
             m_isStopped = false;
+            m_isMoving = false;
         }
 
         private void Update()
         {
             MoveDog();
+            CheckingDogVelocity();
         }
-
-        #endregion
-
-        #region  Private Methods
 
         private void MoveDog()
         {
@@ -48,7 +53,6 @@ namespace TOGETHER.Assets.Scripts.Dog
             {
                 m_dogNavMesh.isStopped = false;
                 m_dogNavMesh.SetDestination(m_idleZone.position);
-                m_animatorDog.SetBool("IsWalking", true);
                 m_isStopped = false;
             }
             else
@@ -59,10 +63,22 @@ namespace TOGETHER.Assets.Scripts.Dog
                     m_isStopped = true;
                 }
             }
-
-            m_animatorDog.SetBool("IsWalking", m_dogNavMesh.velocity.magnitude > 0.05f);
         }
-    
+
+        private void CheckingDogVelocity()
+        {
+            if (m_dogNavMesh.velocity.magnitude > 0.05f)
+            {
+                m_isMoving = true;
+                OnDogisMoving?.Invoke(m_isMoving);
+            }
+            else
+            {
+                m_isMoving = false;
+                OnDogisMoving?.Invoke(m_isMoving);
+            }
+        }
+
         #endregion
     }
 }
