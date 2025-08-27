@@ -7,7 +7,7 @@ namespace TOGETHER.Player
         #region Fields
 
         private Animator _animator;
-        private PlayerController _playerController;
+        private PlayerMove _playerController;
         #endregion
 
         #region Unity Methods
@@ -15,7 +15,7 @@ namespace TOGETHER.Player
         private void Awake()
         {
             _animator = GetComponent<Animator>();
-            _playerController = GetComponent<PlayerController>();
+            _playerController = GetComponent<PlayerMove>();
         }
 
         private void OnEnable()

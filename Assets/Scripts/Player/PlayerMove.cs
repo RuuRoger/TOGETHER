@@ -7,7 +7,7 @@ namespace TOGETHER.Player
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(BoxCollider))]
 
-    public class PlayerController : MonoBehaviour
+    public class PlayerMove : MonoBehaviour
     {
         #region Inspector Fields
 
