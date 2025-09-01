@@ -1,0 +1,60 @@
+@startuml
+
+class MonoBehaviour #LightPink
+
+class Enums #LightBlue
+{
+    + Idle;
+    + IsWalking;
+}
+
+class PlayerMove #LightYellow
+{
+    + OnAnimationStateChanged
+    - Awake();
+    - Update();
+    - Movment():
+}
+
+class PlayerAnimation 
+{
+    - Awake();
+    * OnEnable(): Listener;
+    - OnDiseable();
+    - Start();
+    - UpdateAnimation();
+}
+
+class DogMovement #LightYellow
+{
+    + OnAnimationStateChanged;
+    - Awake();
+    - Update();
+    - MovdeDog();
+    - CheckingDogVelocity();
+}
+
+class DogAnimation
+{
+    - Awake();
+    * OnEnable(): Listener;
+    - OnDiseable();
+    - UpDateDogAnimation();|
+}
+
+PlayerMove --|> MonoBehaviour
+PlayerAnimation --|> MonoBehaviour
+DogMovement --|> MonoBehaviour
+DogAnimation --|> MonoBehaviour
+
+PlayerMove --> Enums
+PlayerAnimation --> Enums
+DogMovement --> Enums
+DogAnimation --> Enums
+
+PlayerMove --> PlayerAnimation : Event
+DogMovement --> DogAnimation : Event
+
+
+
+@enduml
