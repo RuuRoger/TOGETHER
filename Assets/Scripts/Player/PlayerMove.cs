@@ -32,7 +32,7 @@ namespace TOGETHER.Player
         public event Action<bool> OnPlayerIsRunning;
         #endregion
 
-        #region Unity Methods
+        #region Private Methods
 
         private void Awake()
         {
@@ -45,10 +45,6 @@ namespace TOGETHER.Player
             RunningControl();
             Movement();
         }
-
-        #endregion
-
-        #region Private Methods
 
         private void Movement()
         {
