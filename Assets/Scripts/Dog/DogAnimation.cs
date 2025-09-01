@@ -1,5 +1,6 @@
-using TOGETHER.Player;
 using UnityEngine;
+using TOGETHER.Assets.Scripts.Player;
+using TOGETHER.Assets.Scripts.Common;
 
 namespace TOGETHER.Assets.Scripts.Dog
 {
@@ -10,9 +11,11 @@ namespace TOGETHER.Assets.Scripts.Dog
     {
         #region Fields
 
+        private AnimationStates m_currentState;
         private Animator m_animatorDog;
         private DogMovement m_dogMovement;
         private PlayerMove m_player;
+        private bool m_playerIsRunning; // Nueva variable para controlar prioridad
 
         #endregion
 
@@ -23,44 +26,37 @@ namespace TOGETHER.Assets.Scripts.Dog
             m_animatorDog = GetComponent<Animator>();
             m_dogMovement = GetComponent<DogMovement>();
             m_player = FindAnyObjectByType<PlayerMove>();
+            m_currentState = AnimationStates.Idle; // Inicializa el estado
         }
 
         private void OnEnable()
         {
-            m_dogMovement.OnDogisMoving += DogMove;
-            m_player.OnPlayerIsRunning += Run;
+            m_dogMovement.OnAnimationStateChanged += UpdateDogAnimation;
+            m_player.OnAnimationStateChanged += OnPlayerStateChanged;
         }
 
         private void OnDisable()
         {
-            m_dogMovement.OnDogisMoving -= DogMove;
-            m_player.OnPlayerIsRunning -= Run;
+            m_dogMovement.OnAnimationStateChanged -= UpdateDogAnimation;
+            m_player.OnAnimationStateChanged -= OnPlayerStateChanged;
         }
 
-        private void DogMove(bool value)
+        private void UpdateDogAnimation(AnimationStates newState)
         {
-            if (value)
-            {
-                m_animatorDog.SetBool("IsIdleing", false);
-                m_animatorDog.SetBool("IsWalking", true);
-                m_animatorDog.SetBool("IsRunning", false);
-            }
-            else
-            {
-                m_animatorDog.SetBool("IsIdleing", true);
-                m_animatorDog.SetBool("IsWalking", false);
-                m_animatorDog.SetBool("IsRunning", false);
-            }
+            // Si el player está corriendo, el perro debe correr (prioridad)
+            if (m_playerIsRunning)
+                newState = AnimationStates.IsRunning;
+
+            if (m_currentState == newState)
+                return;
+
+            m_animatorDog.SetTrigger(newState.ToString());
+            m_currentState = newState;
         }
 
-        private void Run(bool value)
+        private void OnPlayerStateChanged(AnimationStates playerState)
         {
-            if (value)
-            {
-                m_animatorDog.SetBool("IsIdleing", false);
-                m_animatorDog.SetBool("IsWalking", false);
-                m_animatorDog.SetBool("IsRunning", true);
-            }
+            m_playerIsRunning = (playerState == AnimationStates.IsRunning);
         }
 
         #endregion

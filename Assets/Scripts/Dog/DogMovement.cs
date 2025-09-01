@@ -1,4 +1,5 @@
 using System;
+using TOGETHER.Assets.Scripts.Common;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,15 +19,15 @@ namespace TOGETHER.Assets.Scripts.Dog
 
         #region private fields
 
+        private AnimationStates m_currentState;
         private NavMeshAgent m_dogNavMesh;
         private bool m_isStopped;
-        private bool m_isMoving;
 
         #endregion
 
         #region Events
 
-        public event Action<bool> OnDogisMoving;
+        public event Action<AnimationStates> OnAnimationStateChanged;
 
         #endregion
 
@@ -36,7 +37,7 @@ namespace TOGETHER.Assets.Scripts.Dog
         {
             m_dogNavMesh = GetComponent<NavMeshAgent>();
             m_isStopped = false;
-            m_isMoving = false;
+            m_currentState = AnimationStates.Idle;
         }
 
         private void Update()
@@ -67,15 +68,17 @@ namespace TOGETHER.Assets.Scripts.Dog
 
         private void CheckingDogVelocity()
         {
+            AnimationStates newState;
+
             if (m_dogNavMesh.velocity.magnitude > 0.05f)
-            {
-                m_isMoving = true;
-                OnDogisMoving?.Invoke(m_isMoving);
-            }
+                newState = AnimationStates.IsWalking;
             else
+                newState = AnimationStates.Idle;
+
+            if (m_currentState != newState)
             {
-                m_isMoving = false;
-                OnDogisMoving?.Invoke(m_isMoving);
+                m_currentState = newState;
+                OnAnimationStateChanged?.Invoke(newState);
             }
         }
 
