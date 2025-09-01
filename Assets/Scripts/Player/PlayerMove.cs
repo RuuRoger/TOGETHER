@@ -16,7 +16,6 @@ namespace TOGETHER.Assets.Scripts.Player
         [Space(10)]
         [SerializeField] private float m_speedPlayerMovement;
         [Space]
-        [SerializeField] private float m_runIncrement;
         [SerializeField] private float m_rotationSpeed;
 
         #endregion
@@ -47,14 +46,7 @@ namespace TOGETHER.Assets.Scripts.Player
 
         private void Update()
         {
-            RunningControl();
             Movement();
-        }
-
-        private void RunningControl()
-        {
-            m_isRunning = Input.GetKey(KeyCode.Space);
-            m_currentSpeed = m_isRunning ? m_speedPlayerMovement * m_runIncrement : m_speedPlayerMovement;
         }
 
         private void Movement()
@@ -70,7 +62,7 @@ namespace TOGETHER.Assets.Scripts.Player
 
             if (inputMovement.magnitude > 0.1f)
             {
-                newState = m_isRunning ? AnimationStates.IsRunning : AnimationStates.IsWalking;
+                newState = AnimationStates.IsWalking;
 
                 // Player's rotation
                 Vector3 lookDirection = new Vector3(inputX, 0, inputZ);
