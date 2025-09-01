@@ -1,54 +1,49 @@
 using UnityEngine;
+using TOGETHER.Assets.Scripts.Common;
 
-namespace TOGETHER.Player
+namespace TOGETHER.Assets.Scripts.Player
 {
     public class PlayerAnimations : MonoBehaviour
     {
         #region Fields
 
-        private Animator _animator;
-        private PlayerMove _playerController;
-        #endregion
-
-        #region Unity Methods
-
-        private void Awake()
-        {
-            _animator = GetComponent<Animator>();
-            _playerController = GetComponent<PlayerMove>();
-        }
-
-        private void OnEnable()
-        {
-            _playerController.OnPlayerIsMoving += UpdateAnimation;
-            _playerController.OnPlayerIsRunning += UpdateRunningAnimation;
-        }
-
-        private void OnDisable()
-        {
-            _playerController.OnPlayerIsMoving -= UpdateAnimation;
-            _playerController.OnPlayerIsRunning -= UpdateRunningAnimation;
-        }
-
+        private AnimationStates m_currentState;
+        private Animator m_animator;
+        private PlayerMove m_playerController;
+        
         #endregion
 
         #region Private Methods
 
-        private void UpdateAnimation(float actionValue)
+        private void Awake()
         {
-            if (actionValue > 0.1f)
-                _animator.SetFloat("Walk", actionValue);
-            else
-                _animator.SetFloat("Walk", 0f);
+            m_animator = GetComponent<Animator>();
+            m_playerController = GetComponent<PlayerMove>();
         }
 
-        private void UpdateRunningAnimation(bool isRunning)
+        private void OnEnable()
         {
-            _animator.SetBool("Run", isRunning);
+            m_playerController.OnAnimationStateChanged += UpdateAnimation;
         }
 
+        private void OnDisable()
+        {
+            m_playerController.OnAnimationStateChanged -= UpdateAnimation;
+        }
+        private void Start()
+        {
+            m_currentState = AnimationStates.Idle;
+        }
 
-        #endregion
+        private void UpdateAnimation(AnimationStates newState)
+        {
+            if (m_currentState == newState)
+                return;
+
+            m_animator.SetTrigger(newState.ToString());
+            m_currentState = newState;
+        }
     }
-}
 
+    #endregion
+}

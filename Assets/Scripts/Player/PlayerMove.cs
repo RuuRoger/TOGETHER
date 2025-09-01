@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
+using TOGETHER.Assets.Scripts.Common;
 
-namespace TOGETHER.Player
+namespace TOGETHER.Assets.Scripts.Player
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Animator))]
@@ -13,31 +14,35 @@ namespace TOGETHER.Player
 
         [Header("Speed settings")]
         [Space(10)]
-        [SerializeField] private float _speedPlayerMovement;
+        [SerializeField] private float m_speedPlayerMovement;
         [Space]
-        [SerializeField] private float _runIncrement;
-        [SerializeField] private float _rotationSpeed;
+        [SerializeField] private float m_runIncrement;
+        [SerializeField] private float m_rotationSpeed;
+
         #endregion
 
         #region Fields
 
-        private Rigidbody _rigidbodyPlayer;
-        private bool _isRunning;
-        private float _currentSpeed;
+        private AnimationStates m_currentState;
+        private Rigidbody m_rigidbodyPlayer;
+        private bool m_isRunning;
+        private float m_currentSpeed;
+
         #endregion
 
         #region Events
 
-        public event Action<float> OnPlayerIsMoving;
-        public event Action<bool> OnPlayerIsRunning;
+        public event Action<AnimationStates> OnAnimationStateChanged;
+
         #endregion
 
         #region Private Methods
 
         private void Awake()
         {
-            _rigidbodyPlayer = GetComponent<Rigidbody>();
-            _currentSpeed = _speedPlayerMovement;
+            m_rigidbodyPlayer = GetComponent<Rigidbody>();
+            m_currentSpeed = m_speedPlayerMovement;
+            m_currentState = AnimationStates.Idle;
         }
 
         private void Update()
@@ -46,38 +51,45 @@ namespace TOGETHER.Player
             Movement();
         }
 
+        private void RunningControl()
+        {
+            m_isRunning = Input.GetKey(KeyCode.Space);
+            m_currentSpeed = m_isRunning ? m_speedPlayerMovement * m_runIncrement : m_speedPlayerMovement;
+        }
+
         private void Movement()
         {
-            //Values for the method
             float inputX = Input.GetAxis("Horizontal");
             float inputZ = Input.GetAxis("Vertical");
             Vector3 inputMovement = new Vector3(inputX, 0, inputZ);
-            Vector3 playerMovement = inputMovement.normalized * _currentSpeed;
+            Vector3 playerMovement = inputMovement.normalized * m_currentSpeed;
 
-            //The movmement of player here
-            _rigidbodyPlayer.linearVelocity = new Vector3(playerMovement.x, _rigidbodyPlayer.linearVelocity.y, playerMovement.z);
+            m_rigidbodyPlayer.linearVelocity = new Vector3(playerMovement.x, m_rigidbodyPlayer.linearVelocity.y, playerMovement.z);
+
+            AnimationStates newState;
 
             if (inputMovement.magnitude > 0.1f)
             {
-                OnPlayerIsMoving?.Invoke(inputMovement.magnitude);
+                newState = m_isRunning ? AnimationStates.IsRunning : AnimationStates.IsWalking;
 
-                //This is for rotation!
+                // Player's rotation
                 Vector3 lookDirection = new Vector3(inputX, 0, inputZ);
                 Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * _rotationSpeed);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * m_rotationSpeed);
             }
             else
-                OnPlayerIsMoving?.Invoke(inputMovement.magnitude);
-        }
-
-        private void RunningControl()
-        {
-            _isRunning = Input.GetKey(KeyCode.Space);
-
-            _currentSpeed = _isRunning ? _speedPlayerMovement * _runIncrement : _speedPlayerMovement;
-            OnPlayerIsRunning?.Invoke(_isRunning);
+            {
+                newState = AnimationStates.Idle;
             }
 
-        #endregion
+            if (m_currentState != newState)
+            {
+                m_currentState = newState;
+                OnAnimationStateChanged?.Invoke(newState);
+            }
+        }
     }
+
+    #endregion
+
 }
