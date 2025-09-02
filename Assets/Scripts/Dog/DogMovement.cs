@@ -40,6 +40,11 @@ namespace TOGETHER.Assets.Scripts.Dog
             m_currentState = AnimationStates.Idle;
         }
 
+        private void Start()
+        {
+            m_dogNavMesh.speed = 3.5f;
+        }
+
         private void Update()
         {
             MoveDog();
