@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.AI;
+using TOGETHER.Assets.Scripts.Common;
+using System;
 
 namespace Unity.AI.Navigation.Samples
 {
     /// <summary>
     /// Use physics raycast hit from mouse click to set agent destination
     /// </summary>
-
-    //! Remember: "m_" is like "_", it's a private field
 
     [RequireComponent(typeof(NavMeshAgent))]
     public class ClickToMove : MonoBehaviour
@@ -16,7 +16,14 @@ namespace Unity.AI.Navigation.Samples
 
         NavMeshAgent m_Agent;
         RaycastHit m_HitInfo = new RaycastHit();
-        private Animator _animatorDog;
+        private Animator m_animatorDog;
+        private AnimationStates m_currentState;
+
+        #endregion
+
+        #region Events
+
+        public event Action<AnimationStates> OnDogMoveWithClick;
 
         #endregion
 
@@ -25,7 +32,8 @@ namespace Unity.AI.Navigation.Samples
         void Start()
         {
             m_Agent = GetComponent<NavMeshAgent>();
-            _animatorDog = GetComponent<Animator>();
+            m_animatorDog = GetComponent<Animator>();
+            m_currentState = AnimationStates.Idle;
         }
 
         void Update()
@@ -34,7 +42,11 @@ namespace Unity.AI.Navigation.Samples
             {
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray.origin, ray.direction, out m_HitInfo))
+                {
+                    m_Agent.speed = 8f;
+                    m_Agent.angularSpeed = 120f;
                     m_Agent.destination = m_HitInfo.point;
+                }
             }
 
             WalkAnimation();
@@ -42,10 +54,18 @@ namespace Unity.AI.Navigation.Samples
 
         private void WalkAnimation()
         {
-            if (m_Agent.velocity.magnitude > 0.1f)
-                _animatorDog.SetBool("IsWalking", true);
+            AnimationStates newState;
+
+            if (m_Agent.velocity.magnitude > 0.05f)
+                newState = AnimationStates.IsWalking;
             else
-                _animatorDog.SetBool("IsWalking", false);
+                newState = AnimationStates.Idle;
+
+            if (m_currentState != newState)
+            {
+                m_currentState = newState;
+                OnDogMoveWithClick?.Invoke(newState);
+            }
         }
         
         #endregion
