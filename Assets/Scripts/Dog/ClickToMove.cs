@@ -29,14 +29,27 @@ namespace Unity.AI.Navigation.Samples
 
         #region Unity Callbacks
 
-        void Start()
+        private void Awake()
         {
-            m_Agent = GetComponent<NavMeshAgent>();
+            m_Agent = GetComponent<NavMeshAgent>();         
+        }
+
+        private void Start()
+        {
+            m_Agent.speed = 7f;
             m_animatorDog = GetComponent<Animator>();
             m_currentState = AnimationStates.Idle;
         }
 
-        void Update()
+        private void OnEnable()
+        {
+            if (m_Agent == null)
+                m_Agent = GetComponent<NavMeshAgent>();  
+            m_Agent.isStopped = false;
+            m_Agent.enabled = true;
+        }
+
+        private void Update()
         {
             if (Input.GetMouseButtonDown(0) && !Input.GetKey(KeyCode.LeftShift))
             {
@@ -67,7 +80,7 @@ namespace Unity.AI.Navigation.Samples
                 OnDogMoveWithClick?.Invoke(newState);
             }
         }
-        
+
         #endregion
     }
 }
