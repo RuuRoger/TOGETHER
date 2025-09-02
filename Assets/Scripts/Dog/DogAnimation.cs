@@ -1,6 +1,6 @@
 using UnityEngine;
-using TOGETHER.Assets.Scripts.Player;
 using TOGETHER.Assets.Scripts.Common;
+using Unity.AI.Navigation.Samples;
 
 namespace TOGETHER.Assets.Scripts.Dog
 {
@@ -14,7 +14,8 @@ namespace TOGETHER.Assets.Scripts.Dog
         private AnimationStates m_currentState;
         private Animator m_animatorDog;
         private DogMovement m_dogMovement;
-        private PlayerMove m_player;
+        private ClickToMove m_dogMovingWithClick;
+        
 
         #endregion
 
@@ -24,18 +25,22 @@ namespace TOGETHER.Assets.Scripts.Dog
         {
             m_animatorDog = GetComponent<Animator>();
             m_dogMovement = GetComponent<DogMovement>();
-            m_player = FindAnyObjectByType<PlayerMove>();
+            m_dogMovingWithClick = GetComponent<ClickToMove>();
             m_currentState = AnimationStates.Idle;
         }
 
         private void OnEnable()
         {
             m_dogMovement.OnAnimationStateChanged += UpdateDogAnimation;
+            m_dogMovingWithClick.OnDogMoveWithClick += UpdateDogAnimation;
+
         }
 
         private void OnDisable()
         {
             m_dogMovement.OnAnimationStateChanged -= UpdateDogAnimation;
+            m_dogMovingWithClick.OnDogMoveWithClick -= UpdateDogAnimation;
+
         }
 
         private void UpdateDogAnimation(AnimationStates newState)
