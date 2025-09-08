@@ -24,7 +24,6 @@ namespace TOGETHER.Assets.Scripts.Player
 
         private AnimationStates m_currentState;
         private Rigidbody m_rigidbodyPlayer;
-        private bool m_isRunning;
         private float m_currentSpeed;
 
         #endregion
@@ -32,6 +31,7 @@ namespace TOGETHER.Assets.Scripts.Player
         #region Events
 
         public event Action<AnimationStates> OnAnimationStateChanged;
+        public event Action<Vector3> OnPlayerInputMove;
 
         #endregion
 
@@ -79,6 +79,9 @@ namespace TOGETHER.Assets.Scripts.Player
                 m_currentState = newState;
                 OnAnimationStateChanged?.Invoke(newState);
             }
+
+            OnPlayerInputMove?.Invoke(inputMovement);
+
         }
     }
 
