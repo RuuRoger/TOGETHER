@@ -21,7 +21,7 @@ namespace TOGETHER.Camera
 
         private Vector3 m_offset;
         private PlayerMove m_player;
-
+    
         #endregion
 
         #region Unity Methods
