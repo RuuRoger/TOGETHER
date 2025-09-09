@@ -11,6 +11,7 @@ class Enums #LightBlue
 class PlayerMove #LightYellow
 {
     + OnAnimationStateChanged
+    + OnPlayerInputMove
     - Awake();
     - Update();
     - Movment():
@@ -42,20 +43,22 @@ class DogAnimation
     - UpDateDogAnimation();|
 }
 
-class ClickToMove #LightYellow
+class CameraFollow #LightGreen
 {
-    + OnDogMoveWithClick;
     - Awake();
-    - Start();
-    - OnEnable();
-    - Update();
-    - WalkAnimation();
+    - OnEnable(): Listener;
+    - OnDisable();
+    - LateUpdate();
+    - HandleCameraAndInputPlayer();
 }
+
+
 
 PlayerMove --|> MonoBehaviour
 PlayerAnimation --|> MonoBehaviour
 DogMovement --|> MonoBehaviour
 DogAnimation --|> MonoBehaviour
+CameraFollow --|> MonoBehaviour
 
 PlayerMove --> Enums
 PlayerAnimation --> Enums
@@ -63,10 +66,8 @@ DogMovement --> Enums
 DogAnimation --> Enums
 
 PlayerMove --> PlayerAnimation : Event
+PlayerMove --> CameraFollow : Event
 DogMovement --> DogAnimation : Event
 
-ClickToMove --|> MonoBehaviour
-ClickToMove --> DogAnimation : Event
-ClickToMove --> Enums
 
 @enduml
