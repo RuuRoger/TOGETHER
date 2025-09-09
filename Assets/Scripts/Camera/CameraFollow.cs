@@ -13,7 +13,7 @@ namespace TOGETHER.Camera
         [Space]
         [SerializeField] private float m_smoothSpeed;
         [Space]
-        [SerializeField] private float m_anticipacion;
+        [SerializeField] private float m_lookAheadCamera;
 
         #endregion
 
@@ -28,7 +28,6 @@ namespace TOGETHER.Camera
 
         private void Awake()
         {
-            // m_offset = transform.position - m_target.position;
             m_offset = new Vector3(0, 15, 0);
             m_player = m_target.GetComponent<PlayerMove>();
         }
@@ -57,11 +56,13 @@ namespace TOGETHER.Camera
         private void HandleCameraAndInputPlayer(Vector3 moveDirection)
         {
             Vector3 baseOffset = new Vector3(0f, 15f, 0f);
+            Vector3 targetOffset = baseOffset;
 
-            if (moveDirection.magnitude > 0.1f)
-                m_offset = baseOffset + moveDirection.normalized * m_anticipacion;
-            else
-                m_offset = baseOffset;
+            if (moveDirection.magnitude > 0.7f)
+            {
+                targetOffset += moveDirection.normalized * m_lookAheadCamera;
+                m_offset = Vector3.Lerp(m_offset, targetOffset, Time.deltaTime * m_smoothSpeed);
+            }
 
         }
 
