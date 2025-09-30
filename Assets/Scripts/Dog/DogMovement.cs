@@ -14,7 +14,6 @@ namespace TOGETHER.Assets.Scripts.Dog
         [Header("Settings to Walk")]
         [Space(10)]
         [SerializeField] private Transform m_idleZone;
-        [SerializeField] private Transform m_player;
 
         #endregion
 
@@ -50,13 +49,11 @@ namespace TOGETHER.Assets.Scripts.Dog
         {
             MoveDog();
             CheckingDogVelocity();
-
-            Debug.Log((m_player.position - transform.position).magnitude);
         }
 
         private void MoveDog()
         {
-            float distance = (m_player.position - transform.position).magnitude;
+            float distance = Vector3.Distance(transform.position, m_idleZone.position);
 
             if (distance > m_dogNavMesh.stoppingDistance)
             {
@@ -66,15 +63,12 @@ namespace TOGETHER.Assets.Scripts.Dog
             }
             else
             {
-                m_dogNavMesh.SetDestination(this.transform.position);
-
                 if (!m_isStopped)
                 {
                     m_dogNavMesh.isStopped = true;
                     m_isStopped = true;
                 }
             }
-
         }
 
         private void CheckingDogVelocity()
