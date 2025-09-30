@@ -46,9 +46,16 @@ namespace TOGETHER.Assets.Scripts.Player
             m_currentState = newState;
         }
 
-        private void ShootFireballAnimation()
+        private void ShootFireballAnimation(bool value)
         {
-            m_animator.SetBool("Fireball", true);
+            if (value)
+            {
+                m_animator.SetBool("Fireball", true);
+            }
+            else
+            {
+                m_animator.SetBool("Fireball", false);
+            }
         }
     }
 

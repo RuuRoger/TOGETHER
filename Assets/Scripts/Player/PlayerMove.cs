@@ -17,6 +17,11 @@ namespace TOGETHER.Assets.Scripts.Player
         [SerializeField] private float m_speedPlayerMovement;
         [Space]
         [SerializeField] private float m_rotationSpeed;
+        [Space]
+        [Header("Powers")]
+        [Space(10)]
+        [SerializeField] private GameObject m_fireball;
+        [SerializeField] private GameObject m_iceball;
 
         #endregion
 
@@ -25,6 +30,7 @@ namespace TOGETHER.Assets.Scripts.Player
         private AnimationStates m_currentState;
         private Rigidbody m_rigidbodyPlayer;
         private float m_currentSpeed;
+        private bool m_isShooting;
 
         #endregion
 
@@ -32,7 +38,7 @@ namespace TOGETHER.Assets.Scripts.Player
 
         public event Action<AnimationStates> OnAnimationStateChanged;
         public event Action<Vector3> OnPlayerInputMove;
-        public event Action OnShootFireball;
+        public event Action<bool> OnShootFireball;
 
         #endregion
 
@@ -43,18 +49,62 @@ namespace TOGETHER.Assets.Scripts.Player
             m_rigidbodyPlayer = GetComponent<Rigidbody>();
             m_currentSpeed = m_speedPlayerMovement;
             m_currentState = AnimationStates.Idle;
+            m_iceball.SetActive(false);
+            m_fireball.SetActive(false);
+            m_isShooting = false;
         }
 
         private void Update()
         {
             Movement();
-            ShootFireball();
         }
 
         private void Movement()
         {
             float inputX = Input.GetAxis("Horizontal");
             float inputZ = Input.GetAxis("Vertical");
+
+            // Mostrar fireball e iceball solo mientras se mantiene la barra espaciadora
+            bool holdingSpace = Input.GetKey(KeyCode.Space);
+            m_fireball.SetActive(holdingSpace);
+            m_iceball.SetActive(holdingSpace);
+
+            // Lanzar el evento solo al presionar o soltar la barra espaciadora
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                m_isShooting = true;
+                OnShootFireball?.Invoke(m_isShooting);
+            }
+            else if (Input.GetKeyUp(KeyCode.Space))
+            {
+                m_isShooting = false;
+                OnShootFireball?.Invoke(m_isShooting);
+            }
+
+            // Si se mantiene la barra espaciadora, detener movimiento y solo rotar
+            if (holdingSpace)
+            {
+                // Detener completamente el movimiento
+                m_rigidbodyPlayer.linearVelocity = new Vector3(0, m_rigidbodyPlayer.linearVelocity.y, 0);
+
+                // Solo rotar si hay input horizontal
+                if (Mathf.Abs(inputX) > 0.1f)
+                {
+                    transform.Rotate(Vector3.up, inputX * 90f * Time.deltaTime);
+                }
+
+                // Mantener estado idle y terminar
+                if (m_currentState != AnimationStates.Idle)
+                {
+                    m_currentState = AnimationStates.Idle;
+                    OnAnimationStateChanged?.Invoke(m_currentState);
+                }
+
+                OnPlayerInputMove?.Invoke(Vector3.zero);
+                return;
+            }
+
+            // Movimiento normal cuando no se mantiene la barra espaciadora
             Vector3 inputMovement = new Vector3(inputX, 0, inputZ);
             Vector3 playerMovement = inputMovement.normalized * m_currentSpeed;
 
@@ -83,15 +133,6 @@ namespace TOGETHER.Assets.Scripts.Player
             }
 
             OnPlayerInputMove?.Invoke(inputMovement);
-
-        }
-
-        private void ShootFireball()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                OnShootFireball?.Invoke();
-            }
         }
     }
 
