@@ -5,7 +5,6 @@ Shader "Universal Render Pipeline/FirePlayer"
     {
        m_color ("Color", Color) = (1,1,1,1)
        m_birghtness ("Brillo", Float) = 1
-
     }
 
     SubShader
@@ -28,7 +27,6 @@ Shader "Universal Render Pipeline/FirePlayer"
             {
                 float4 m_color;
                 float m_birghtness;
-      
             };
 
             #pragma vertex Vert
@@ -36,7 +34,7 @@ Shader "Universal Render Pipeline/FirePlayer"
             
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             //Mis shaders
-            #include "Assets\Shaders\MyHLSLCODE_FirePlayer.cginc" 
+            #include "Assets\Shaders\FirePlayer.cginc" 
 
             struct Attributes
             {
