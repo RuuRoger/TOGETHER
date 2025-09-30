@@ -10,7 +10,7 @@ namespace TOGETHER.Assets.Scripts.Player
         private AnimationStates m_currentState;
         private Animator m_animator;
         private PlayerMove m_playerController;
-        
+
         #endregion
 
         #region Private Methods
@@ -24,11 +24,13 @@ namespace TOGETHER.Assets.Scripts.Player
         private void OnEnable()
         {
             m_playerController.OnAnimationStateChanged += UpdateAnimation;
+            m_playerController.OnShootFireball += ShootFireballAnimation;
         }
 
         private void OnDisable()
         {
             m_playerController.OnAnimationStateChanged -= UpdateAnimation;
+            m_playerController.OnShootFireball -= ShootFireballAnimation;
         }
         private void Start()
         {
@@ -42,6 +44,11 @@ namespace TOGETHER.Assets.Scripts.Player
 
             m_animator.SetTrigger(newState.ToString());
             m_currentState = newState;
+        }
+
+        private void ShootFireballAnimation()
+        {
+            m_animator.SetBool("Fireball", true);
         }
     }
 

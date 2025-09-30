@@ -32,6 +32,7 @@ namespace TOGETHER.Assets.Scripts.Player
 
         public event Action<AnimationStates> OnAnimationStateChanged;
         public event Action<Vector3> OnPlayerInputMove;
+        public event Action OnShootFireball;
 
         #endregion
 
@@ -47,6 +48,7 @@ namespace TOGETHER.Assets.Scripts.Player
         private void Update()
         {
             Movement();
+            ShootFireball();
         }
 
         private void Movement()
@@ -82,6 +84,14 @@ namespace TOGETHER.Assets.Scripts.Player
 
             OnPlayerInputMove?.Invoke(inputMovement);
 
+        }
+
+        private void ShootFireball()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                OnShootFireball?.Invoke();
+            }
         }
     }
 
