@@ -10,10 +10,7 @@ namespace TOGETHER.Assets.Scripts.Player
         // Array de poderes disponibles (asignar en el Inspector)
         [SerializeField] private GameObject[] m_playerPower;
         
-        // Poder actualmente seleccionado
         private GameObject m_powerSelected;
-        
-        // Índice del poder actual en el array
         private byte m_index;
 
         /// <summary>
@@ -57,12 +54,12 @@ namespace TOGETHER.Assets.Scripts.Player
         }
 
         /// <summary>
-        /// Gestiona el cambio de poderes cuando se presiona la tecla R
+        /// Gestiona el cambio de poderes cuando se presiona la tecla E
         /// </summary>
         public void PowerHandler()
         {
-            // Si se presiona la tecla R
-            if (Input.GetKeyDown(KeyCode.R))
+            // Si se presiona la tecla E
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 // Incrementa el índice para pasar al siguiente poder
                 m_index++;

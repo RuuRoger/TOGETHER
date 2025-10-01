@@ -35,6 +35,14 @@ namespace TOGETHER.Assets.Scripts.Player
 
         #endregion
 
+        public bool isShooting
+        {
+            get
+            {
+                return m_isShooting;
+            }
+        }
+
         #region Events
 
         public event Action<AnimationStates> OnAnimationStateChanged;
