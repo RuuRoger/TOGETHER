@@ -34,7 +34,7 @@ Shader "Universal Render Pipeline/FirePlayer"
             
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             //Mis shaders
-            #include "Assets\Shaders\FirePlayer.cginc" 
+            #include "Assets\Shaders\BirghtnessBloom.cginc" 
 
             struct Attributes
             {
