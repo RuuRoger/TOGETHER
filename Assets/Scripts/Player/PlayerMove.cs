@@ -20,8 +20,8 @@ namespace TOGETHER.Assets.Scripts.Player
         [Space]
         [Header("Powers")]
         [Space(10)]
-        [SerializeField] private GameObject m_fireball;
-        [SerializeField] private GameObject m_iceball;
+        // [SerializeField] private GameObject m_fireball;
+        // [SerializeField] private GameObject m_iceball;
 
         #endregion
 
@@ -31,6 +31,7 @@ namespace TOGETHER.Assets.Scripts.Player
         private Rigidbody m_rigidbodyPlayer;
         private float m_currentSpeed;
         private bool m_isShooting;
+        private PlayerManager m_playerPowers;
 
         #endregion
 
@@ -49,9 +50,10 @@ namespace TOGETHER.Assets.Scripts.Player
             m_rigidbodyPlayer = GetComponent<Rigidbody>();
             m_currentSpeed = m_speedPlayerMovement;
             m_currentState = AnimationStates.Idle;
-            m_iceball.SetActive(false);
-            m_fireball.SetActive(false);
+            // m_iceball.SetActive(false);
+            // m_fireball.SetActive(false);
             m_isShooting = false;
+            m_playerPowers = GetComponent<PlayerManager>();
         }
 
         private void Update()
@@ -64,10 +66,8 @@ namespace TOGETHER.Assets.Scripts.Player
             float inputX = Input.GetAxis("Horizontal");
             float inputZ = Input.GetAxis("Vertical");
 
-            // Mostrar fireball e iceball solo mientras se mantiene la barra espaciadora
+            // Detectar si se mantiene la barra espaciadora
             bool holdingSpace = Input.GetKey(KeyCode.Space);
-            m_fireball.SetActive(holdingSpace);
-            m_iceball.SetActive(holdingSpace);
 
             // Lanzar el evento solo al presionar o soltar la barra espaciadora
             if (Input.GetKeyDown(KeyCode.Space))
@@ -79,6 +79,24 @@ namespace TOGETHER.Assets.Scripts.Player
             {
                 m_isShooting = false;
                 OnShootFireball?.Invoke(m_isShooting);
+            }
+
+            // Manejar activación/desactivación de poderes
+            if (holdingSpace)
+            {
+                // Activa solo el poder seleccionado, desactiva los demás
+                for (int i = 0; i < m_playerPowers.PlayerPowers.Length; i++)
+                {
+                    m_playerPowers.PlayerPowers[i].SetActive(m_playerPowers.PlayerPowers[i] == m_playerPowers.PowerSelected);
+                }
+            }
+            else
+            {
+                // Si no se mantiene espacio, desactiva todos los poderes
+                for (int i = 0; i < m_playerPowers.PlayerPowers.Length; i++)
+                {
+                    m_playerPowers.PlayerPowers[i].SetActive(false);
+                }
             }
 
             // Si se mantiene la barra espaciadora, detener movimiento y solo rotar
@@ -93,7 +111,7 @@ namespace TOGETHER.Assets.Scripts.Player
                     transform.Rotate(Vector3.up, inputX * 90f * Time.deltaTime);
                 }
 
-                // Mantener estado idle y terminar
+                // Mantener estado idle
                 if (m_currentState != AnimationStates.Idle)
                 {
                     m_currentState = AnimationStates.Idle;
