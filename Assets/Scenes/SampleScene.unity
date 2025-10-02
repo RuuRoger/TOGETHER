@@ -2108,9 +2108,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playerPower:
-  - {fileID: 349231853}
-  - {fileID: 1054408550}
-  - {fileID: 559848379}
+  - m_powerName: Fire
+    m_powerObject: {fileID: 349231853}
+    m_projectilePrefab: {fileID: 7931724006776545929, guid: 38c1befa4b0add844b72408acd4bb285, type: 3}
+  - m_powerName: Ice
+    m_powerObject: {fileID: 1054408550}
+    m_projectilePrefab: {fileID: 8948281464136527359, guid: 2f9286444ef510d43b5b8038831ff2bd, type: 3}
+  - m_powerName: Dark Energy
+    m_powerObject: {fileID: 559848379}
+    m_projectilePrefab: {fileID: 4862697959962045184, guid: 5c7b6ea16c8d45d4d965b0a7b2754ce8, type: 3}
 --- !u!114 &157214104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2126,6 +2132,7 @@ MonoBehaviour:
   m_minScale: 0.1
   m_maxScale: 3
   m_scaleSpeed: 0.5
+  m_shootForce: 50
 --- !u!4 &161321743 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4956255927207046, guid: c04be9f92ebf58b46b2204ac3aaa8785, type: 3}
@@ -30875,7 +30882,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: DarkBall
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3759433523131240143, guid: 5c7b6ea16c8d45d4d965b0a7b2754ce8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -30944,7 +30952,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1327167174842680534, guid: 38c1befa4b0add844b72408acd4bb285, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -31013,7 +31022,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: IcePower
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4345914730817686498, guid: 2f9286444ef510d43b5b8038831ff2bd, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
