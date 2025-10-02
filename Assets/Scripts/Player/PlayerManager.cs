@@ -98,8 +98,8 @@ namespace TOGETHER.Assets.Scripts.Player
         /// </summary>
         public void PowerHandler()
         {
-            // Si se presiona la tecla R
-            if (Input.GetKeyDown(KeyCode.R))
+            // Si se presiona la tecla E
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 // Incrementa el índice para pasar al siguiente poder
                 m_index++;

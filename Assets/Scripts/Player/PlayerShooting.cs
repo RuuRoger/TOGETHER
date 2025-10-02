@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace TOGETHER.Assets.Scripts.Player
@@ -69,7 +70,7 @@ namespace TOGETHER.Assets.Scripts.Player
                 {
                     // Obtener el prefab del poder actual
                     GameObject prefab = m_playerManager.PlayerPowers[m_playerManager.SelectedIndex].ProjectilePrefab;
-                    
+
                     if (prefab != null)
                     {
                         // Instanciar el PREFAB (con Rigidbody)
@@ -78,13 +79,13 @@ namespace TOGETHER.Assets.Scripts.Player
                             selectedPower.transform.position,
                             selectedPower.transform.rotation
                         );
-                        
+
                         // ACTIVAR el proyectil
                         projectile.SetActive(true);
-                        
+
                         // Aplicar la escala alcanzada
                         projectile.transform.localScale = selectedPower.transform.localScale;
-                        
+
                         // Añadir velocidad
                         Rigidbody rb = projectile.GetComponent<Rigidbody>();
                         if (rb != null)
@@ -92,11 +93,11 @@ namespace TOGETHER.Assets.Scripts.Player
                             rb.linearVelocity = transform.forward * m_shootForce;
                         }
                     }
-                    
+
                     // Restaurar escala del preview
-                    selectedPower.transform.localScale = m_originalScale;
+                    selectedPower.transform.localScale = m_originalScale;                    
                 }
-                
+
                 // Resetear la escala actual
                 m_currentScale = m_minScale;
             }

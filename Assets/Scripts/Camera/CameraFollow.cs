@@ -28,7 +28,7 @@ namespace TOGETHER.Camera
 
         private void Awake()
         {
-            m_offset = new Vector3(0, 15, 0);
+            m_offset = new Vector3(0, 15f, 0);
             m_player = m_target.GetComponent<PlayerMove>();
         }
 
