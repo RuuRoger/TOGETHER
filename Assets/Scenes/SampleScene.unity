@@ -2132,7 +2132,7 @@ MonoBehaviour:
   m_minScale: 0.1
   m_maxScale: 3
   m_scaleSpeed: 0.5
-  m_shootForce: 50
+  m_shootForce: 20
 --- !u!4 &161321743 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4956255927207046, guid: c04be9f92ebf58b46b2204ac3aaa8785, type: 3}
@@ -30884,6 +30884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3759433523131240143, guid: 5c7b6ea16c8d45d4d965b0a7b2754ce8, type: 3}
+    - {fileID: -8321150880598616844, guid: 5c7b6ea16c8d45d4d965b0a7b2754ce8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -30954,6 +30955,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1327167174842680534, guid: 38c1befa4b0add844b72408acd4bb285, type: 3}
+    - {fileID: 7756043932612968123, guid: 38c1befa4b0add844b72408acd4bb285, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -31024,6 +31026,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4345914730817686498, guid: 2f9286444ef510d43b5b8038831ff2bd, type: 3}
+    - {fileID: -8440034753061612135, guid: 2f9286444ef510d43b5b8038831ff2bd, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
