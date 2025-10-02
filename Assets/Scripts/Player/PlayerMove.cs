@@ -95,7 +95,7 @@ namespace TOGETHER.Assets.Scripts.Player
                 // Activa solo el poder seleccionado, desactiva los demás
                 for (int i = 0; i < m_playerPowers.PlayerPowers.Length; i++)
                 {
-                    m_playerPowers.PlayerPowers[i].SetActive(m_playerPowers.PlayerPowers[i] == m_playerPowers.PowerSelected);
+                    m_playerPowers.PlayerPowers[i].PowerObject.SetActive(m_playerPowers.PlayerPowers[i].PowerObject == m_playerPowers.PowerSelected);
                 }
             }
             else
@@ -103,7 +103,7 @@ namespace TOGETHER.Assets.Scripts.Player
                 // Si no se mantiene espacio, desactiva todos los poderes
                 for (int i = 0; i < m_playerPowers.PlayerPowers.Length; i++)
                 {
-                    m_playerPowers.PlayerPowers[i].SetActive(false);
+                    m_playerPowers.PlayerPowers[i].PowerObject.SetActive(false);
                 }
             }
 

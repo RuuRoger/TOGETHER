@@ -8,6 +8,7 @@ namespace TOGETHER.Assets.Scripts.Player
         [SerializeField] private float m_minScale;
         [SerializeField] private float m_maxScale;
         [SerializeField] private float m_scaleSpeed;
+        [SerializeField] private float m_shootForce;
         
         private PlayerMove m_playerMove;
         private PlayerManager m_playerManager;
@@ -63,13 +64,36 @@ namespace TOGETHER.Assets.Scripts.Player
             }
             else
             {
-                // Cuando se suelta espacio, resetear la escala
+                // Cuando se suelta espacio
                 if (selectedPower != null && m_currentScale > m_minScale)
                 {
-                    // Aquí irá el código de disparo después
-                    Debug.Log($"Disparando con escala: {m_currentScale}");
+                    // Obtener el prefab del poder actual
+                    GameObject prefab = m_playerManager.PlayerPowers[m_playerManager.SelectedIndex].ProjectilePrefab;
                     
-                    // Restaurar escala original
+                    if (prefab != null)
+                    {
+                        // Instanciar el PREFAB (con Rigidbody)
+                        GameObject projectile = Instantiate(
+                            prefab,
+                            selectedPower.transform.position,
+                            selectedPower.transform.rotation
+                        );
+                        
+                        // ACTIVAR el proyectil
+                        projectile.SetActive(true);
+                        
+                        // Aplicar la escala alcanzada
+                        projectile.transform.localScale = selectedPower.transform.localScale;
+                        
+                        // Añadir velocidad
+                        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+                        if (rb != null)
+                        {
+                            rb.linearVelocity = transform.forward * m_shootForce;
+                        }
+                    }
+                    
+                    // Restaurar escala del preview
                     selectedPower.transform.localScale = m_originalScale;
                 }
                 
