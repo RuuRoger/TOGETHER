@@ -51,6 +51,11 @@ namespace TOGETHER.Assets.Scripts.Dog
             CheckingDogVelocity();
         }
 
+        private void OnEnable()
+        {
+            m_dogNavMesh.stoppingDistance = 4f;
+        }
+
         private void MoveDog()
         {
             float distance = Vector3.Distance(transform.position, m_idleZone.position);
