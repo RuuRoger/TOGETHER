@@ -36,13 +36,17 @@ namespace Unity.AI.Navigation.Samples
 
         private void Start()
         {
-            m_Agent.speed = 7f;
+            m_Agent.speed = 3.5f;
+            
             m_animatorDog = GetComponent<Animator>();
             m_currentState = AnimationStates.Idle;
         }
 
         private void OnEnable()
         {
+            m_Agent.speed = 3.5f;
+            m_Agent.stoppingDistance = 0f;
+            
             if (m_Agent == null)
                 m_Agent = GetComponent<NavMeshAgent>();  
             m_Agent.isStopped = false;
