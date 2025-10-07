@@ -20,8 +20,6 @@ namespace TOGETHER.Assets.Scripts.Player
         [Space]
         [Header("Powers")]
         [Space(10)]
-        // [SerializeField] private GameObject m_fireball;
-        // [SerializeField] private GameObject m_iceball;
 
         #endregion
 
@@ -61,8 +59,6 @@ namespace TOGETHER.Assets.Scripts.Player
             m_rigidbodyPlayer = GetComponent<Rigidbody>();
             m_currentSpeed = m_speedPlayerMovement;
             m_currentState = AnimationStates.Idle;
-            // m_iceball.SetActive(false);
-            // m_fireball.SetActive(false);
             m_isShooting = false;
             m_playerPowers = GetComponent<PlayerManager>();
 
@@ -73,7 +69,6 @@ namespace TOGETHER.Assets.Scripts.Player
         private void Update()
         {
             Movement();
-            Debug.Log(m_rigidbodyPlayer.linearVelocity.magnitude);
 
             if (m_rigidbodyPlayer.linearVelocity.magnitude > 0.001f)
             {
