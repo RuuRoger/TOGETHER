@@ -53,8 +53,11 @@ namespace TOGETHER.Assets.Scripts.Player
 
         #region Private Methods
 
+        private Animator m_animatorPlayer;
+
         private void Awake()
         {
+            m_animatorPlayer = GetComponent<Animator>();
             m_rigidbodyPlayer = GetComponent<Rigidbody>();
             m_currentSpeed = m_speedPlayerMovement;
             m_currentState = AnimationStates.Idle;
@@ -62,11 +65,28 @@ namespace TOGETHER.Assets.Scripts.Player
             // m_fireball.SetActive(false);
             m_isShooting = false;
             m_playerPowers = GetComponent<PlayerManager>();
+
         }
+            bool isRunning = false;
+
 
         private void Update()
         {
             Movement();
+            Debug.Log(m_rigidbodyPlayer.linearVelocity.magnitude);
+
+            if (m_rigidbodyPlayer.linearVelocity.magnitude > 0.001f)
+            {
+
+                isRunning = true;
+            }
+            else
+            {
+                isRunning = false;
+            }
+
+            m_animatorPlayer.SetBool("isRunning", isRunning);
+
         }
 
         private void Movement()
@@ -138,8 +158,9 @@ namespace TOGETHER.Assets.Scripts.Player
 
             AnimationStates newState;
 
-            if (inputMovement.magnitude > 0.1f)
+            if (inputMovement.magnitude > 0.01f)
             {
+                
                 newState = AnimationStates.IsWalking;
 
                 // Player's rotation
