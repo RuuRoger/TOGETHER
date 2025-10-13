@@ -2129,9 +2129,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8222e4859424146bd987cc16f447cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_minScale: 0.1
-  m_maxScale: 3
-  m_scaleSpeed: 0.5
+  m_minScale: 0.7
+  m_maxScale: 5
+  m_scaleSpeed: 1
   m_shootForce: 20
 --- !u!4 &161321743 stripped
 Transform:
