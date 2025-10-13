@@ -3,6 +3,8 @@ using UnityEngine.AI;
 using TOGETHER.Assets.Scripts.Player;
 using System;
 using TOGETHER.Assets.Scripts.Common;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 
 namespace TOGETHER.Assets.Scripts.Enemies
 {
@@ -15,8 +17,10 @@ namespace TOGETHER.Assets.Scripts.Enemies
         private PlayerMove m_player;
         private AnimationStates m_currentState;
         private bool m_isFollow;
-
+        private bool m_isPossibleAttack;
+        
         public event Action<AnimationStates> OnWalk;
+        public event Action<bool> OnAttack;
 
         private void Awake()
         {
@@ -24,12 +28,14 @@ namespace TOGETHER.Assets.Scripts.Enemies
             m_player = FindAnyObjectByType<PlayerMove>();
             m_currentState = AnimationStates.Idle;
             m_isFollow = false;
+            m_isPossibleAttack = false;
         }
 
         private void Update()
         {
             CheckEnemyMove();
             GoToPlayer();
+            Attack();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -41,6 +47,12 @@ namespace TOGETHER.Assets.Scripts.Enemies
             }
         }
 
+        // Método específico que se llamará desde el collider de detección de Power
+        public void OnPowerDetected()
+        {
+            Destroy(gameObject);
+        }
+
         private void CheckEnemyMove()
         {
             AnimationStates newState;
@@ -48,6 +60,8 @@ namespace TOGETHER.Assets.Scripts.Enemies
             if (m_agentEnemy1.velocity.magnitude > 0.05f)
             {
                 newState = AnimationStates.IsWalking;
+                m_isPossibleAttack = true;
+
             }
             else
             {
@@ -68,5 +82,20 @@ namespace TOGETHER.Assets.Scripts.Enemies
                 m_agentEnemy1.SetDestination(m_player.transform.position);
             }
         }
+
+        private void Attack()
+        {
+            float distancePlayer = Vector3.Distance(m_player.transform.position, this.transform.position);
+
+            if (m_isPossibleAttack && distancePlayer <= 1f)
+            {
+                OnAttack?.Invoke(true);
+            }
+            else
+            {
+                OnAttack?.Invoke(false);
+            }
+        }
+
     }
 }
