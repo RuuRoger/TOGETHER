@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4345914730817686498}
   m_Layer: 0
   m_Name: IcePower
-  m_TagString: Power
+  m_TagString: Ice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
