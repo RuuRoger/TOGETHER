@@ -7,11 +7,6 @@ namespace TOGETHER.Assets.Scripts.Enemies
     {
         private PlayerShoogting m_power;
 
-        private void Awake()
-        {
-            m_power = FindAnyObjectByType<PlayerShoogting>();
-        }
-
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Power"))
