@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3759433523131240143}
   m_Layer: 0
   m_Name: DarkBall
-  m_TagString: Power
+  m_TagString: Dark
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
