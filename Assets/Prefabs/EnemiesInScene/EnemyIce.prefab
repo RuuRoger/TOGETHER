@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 989d0806edb67ff48b2cc0b645311ca9, type: 3}
       propertyPath: m_Name
-      value: EnemyFire
+      value: EnemyIce
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 989d0806edb67ff48b2cc0b645311ca9, type: 3}
       propertyPath: m_IsActive
@@ -99,7 +99,7 @@ PrefabInstance:
       addedObject: {fileID: 9065577231446113948}
     - targetCorrespondingSourceObject: {fileID: -3168422337102530296, guid: 989d0806edb67ff48b2cc0b645311ca9, type: 3}
       insertIndex: 1
-      addedObject: {fileID: 2256731802479889736}
+      addedObject: {fileID: 1015744306259702681}
     - targetCorrespondingSourceObject: {fileID: -3168422337102530296, guid: 989d0806edb67ff48b2cc0b645311ca9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1025034284796715999}
@@ -208,7 +208,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -3168422337102530296, guid: 989d0806edb67ff48b2cc0b645311ca9, type: 3}
   m_PrefabInstance: {fileID: 1834775715941463410}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2256731802479889736
+--- !u!114 &1015744306259702681
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5580503513762565242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 230770438c176a24aa62a9231951866d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d19fdd403f01dc42b15b8b540e6cc3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!136 &1025034284796715999
