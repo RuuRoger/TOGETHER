@@ -3,8 +3,6 @@ using UnityEngine.AI;
 using TOGETHER.Assets.Scripts.Player;
 using System;
 using TOGETHER.Assets.Scripts.Common;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 
 namespace TOGETHER.Assets.Scripts.Enemies
 {
