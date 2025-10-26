@@ -9,7 +9,7 @@ namespace Assets.Scripts.BuilderLevel
         [SerializeField] private GameObject m_dogPrefab;
         // =================================== PRIVATE METHODS ===================================
 
-        private void Start()
+        private void Awake()
         {
             MakeFloor();
             PutPlayers();
