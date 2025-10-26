@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Assets.Scripts.BuilderLevel
@@ -6,17 +7,18 @@ namespace Assets.Scripts.BuilderLevel
     {
         // =================================== FIELDS ===================================
         [SerializeField] private GameObject m_floorPrefab;
-
+        [SerializeField] private GameObject m_dogPrefab;
         // =================================== PRIVATE METHODS ===================================
 
         private void Start()
         {
             MakeFloor();
+            PutPlayers();
         }
 
         private void MakeFloor()
         {
-            for (float k = 9f; k <= 29f; k++)
+            for (float k = 9f; k <= 39f; k += 2)
             {
                 for (float i = 1f; i <= 29f; i += 2)
                 {
@@ -24,6 +26,12 @@ namespace Assets.Scripts.BuilderLevel
                     GameObject prefabFloorInstantiate = Instantiate(m_floorPrefab, prefabPosition, Quaternion.identity);
                 }
             }
+        }
+
+        private void PutPlayers()
+        {
+            Vector3 prefabDogPosition = new(1f, 0f, 9f);
+            GameObject prefabDogInstantiate = Instantiate(m_dogPrefab, prefabDogPosition, Quaternion.identity);
         }
 
     }
