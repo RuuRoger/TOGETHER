@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Cells
@@ -8,7 +9,8 @@ namespace Assets.Scripts.Cells
         private Vector2 m_idCell;
         private bool m_isAccesible;
         private Renderer m_render;
-        private Color m_cellColor = new(0.4f, 0.7f, 0.02f, 1f);
+        private Color m_cellGreenColor = new(0.4f, 0.7f, 0.02f, 1f);
+        private Color m_cellBlueColor = new(0.4f, 0.7f, 0.9f, 1f);
         private GameObject m_dog;
 
         // =================================== PROPERTIES ===================================
@@ -26,8 +28,8 @@ namespace Assets.Scripts.Cells
 
         public Color CellColor
         {
-            get { return m_cellColor; }
-            set { m_cellColor = value; }
+            get { return m_cellGreenColor; }
+            set { m_cellGreenColor = value; }
         }
 
         // =================================== PRIVATE METHODS ===================================
@@ -40,7 +42,7 @@ namespace Assets.Scripts.Cells
 
         private void Start()
         {
-            m_render.material.color = m_cellColor;
+            m_render.material.color = m_cellGreenColor;
         }
 
         private void OnMouseDown()
