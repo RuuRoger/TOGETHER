@@ -9,6 +9,7 @@ namespace Assets.Scripts.Cells
         private bool m_isAccesible;
         private Renderer m_render;
         private Color m_cellColor = new(0.4f, 0.7f, 0.02f, 1f);
+        private GameObject m_dog;
 
         // =================================== PROPERTIES ===================================
         public Vector2 IDCell
@@ -34,6 +35,7 @@ namespace Assets.Scripts.Cells
         {
             m_render = GetComponent<Renderer>();
             m_isAccesible = false;
+            m_dog = GameObject.FindGameObjectWithTag("Dog");
         }
 
         private void Start()
