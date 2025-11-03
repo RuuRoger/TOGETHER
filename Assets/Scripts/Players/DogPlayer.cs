@@ -9,15 +9,10 @@ namespace Assets.Scripts.Players
         // =================================== EVENTS ===================================
         public event Action<Vector2> OnDogPosition; //Goes to CellManager
 
-        // =================================== PRIVATE METHODS ===================================
-        private void Start()
+        // =================================== PUBLIC METHODS ===================================
+        public void ReadIdCell()
         {
-            ReadIdCell();
-        }
-
-        private void ReadIdCell()
-        {
-            Ray ray = new(transform.position, -(transform.up));
+            Ray ray = new(transform.position, Vector3.down);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 5f))
