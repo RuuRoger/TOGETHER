@@ -22,7 +22,7 @@ Material:
     RenderType: TransparentCutout
   disabledShaderPasses:
   - MOTIONVECTORS
-  m_LockedProperties: _ReceiveShadows _SmoothnessTextureChannel
+  m_LockedProperties: :m_LightmapFlags _ReceiveShadows _SmoothnessTextureChannel
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
