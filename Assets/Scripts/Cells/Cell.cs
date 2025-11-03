@@ -1,17 +1,18 @@
 using System;
 using UnityEngine;
+using Assets.Scripts.Managers;
 
 namespace Assets.Scripts.Cells
 {
     public class Cell : MonoBehaviour
     {
         // =================================== FIELDS ===================================
-        private Vector2 m_idCell;
-        private bool m_isAccesible;
+        private CellManager m_cellManger;
         private Renderer m_render;
+        private Vector2 m_idCell;
         private Color m_cellGreenColor = new(0.4f, 0.7f, 0.02f, 1f);
         private Color m_cellBlueColor = new(0.4f, 0.7f, 0.9f, 1f);
-        private GameObject m_dog;
+        private bool m_isAccesible;
 
         // =================================== PROPERTIES ===================================
         public Vector2 IDCell
@@ -20,16 +21,21 @@ namespace Assets.Scripts.Cells
             set { m_idCell = value; }
         }
 
-        public bool IsAccesible
+        // =================================== EVENTS SUSCRIPTIONS ===================================
+        private void OnEnable()
         {
-            get { return m_isAccesible; }
-            set { m_isAccesible = value; }
+            if (m_cellManger != null)
+            {
+                m_cellManger.OnStartTurn += CheckCellAccessibility;
+            }
         }
 
-        public Color CellColor
+        private void OnDisable()
         {
-            get { return m_cellGreenColor; }
-            set { m_cellGreenColor = value; }
+            if (m_cellManger != null)
+            {
+                m_cellManger.OnStartTurn -= CheckCellAccessibility;
+            }
         }
 
         // =================================== PRIVATE METHODS ===================================
@@ -37,7 +43,7 @@ namespace Assets.Scripts.Cells
         {
             m_render = GetComponent<Renderer>();
             m_isAccesible = false;
-            m_dog = GameObject.FindGameObjectWithTag("Dog");
+            m_cellManger = FindFirstObjectByType<CellManager>();
         }
 
         private void Start()
@@ -48,6 +54,23 @@ namespace Assets.Scripts.Cells
         private void OnMouseDown()
         {
             Debug.Log(IDCell);
+        }
+
+        private void CheckCellAccessibility(Vector2 dogCellID)
+        {
+            float distanceX = Math.Abs(dogCellID.x - IDCell.x);
+            float distanceY = Math.Abs(dogCellID.y - IDCell.y);
+
+            if (distanceX <= 2f && distanceY <= 2f)
+            {
+                m_isAccesible = true;
+                m_render.material.color = m_cellBlueColor;
+            }
+            else
+            {
+                m_isAccesible = false;
+                m_render.material.color = m_cellGreenColor;
+            }
         }
     }
 }
