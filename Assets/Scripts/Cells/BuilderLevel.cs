@@ -7,13 +7,8 @@ namespace Assets.Scripts.Cells
         // =================================== FIELDS ===================================
         [SerializeField] private GameObject m_cellPrefab;
 
-        // =================================== PRIVATE METHODS ===================================
-        private void Start()
-        {
-            MakeLevel();
-        }
-
-        private void MakeLevel()
+        // =================================== PUBLIC METHODS ===================================
+        public void MakeLevel()
         {
             int i = 1; // row
 
