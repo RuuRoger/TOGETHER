@@ -1,5 +1,4 @@
 using UnityEngine;
-using Unity.Mathematics;
 
 namespace Assets.Scripts.Cells
 {
@@ -42,8 +41,8 @@ namespace Assets.Scripts.Cells
         {
             //Dog
             Vector3 dogPosition = new(0f, 0.1f, 10f);
-            GameObject dogInstantiatePrefab = Instantiate(m_dogPrefab, dogPosition, quaternion.identity);
+            Quaternion dogRotation = Quaternion.Euler(0f, 90f, 0);
+            GameObject dogInstantiatePrefab = Instantiate(m_dogPrefab, dogPosition, dogRotation);
         }
-
     }
 }
