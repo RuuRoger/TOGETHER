@@ -10,7 +10,7 @@ namespace Assets.Scripts.Managers
         // =================================== FIELDS ===================================
         private static GameManager m_instance;
         private BuilderLevel m_builderLevel;
-        private DogPlayer m_dogPlayer;
+        private BasePlayer m_basePlayer;
         private CellManager m_cellManager;
 
         // =================================== PROPERTIES ===================================
@@ -52,20 +52,13 @@ namespace Assets.Scripts.Managers
 
             yield return new WaitForEndOfFrame();
 
-            m_dogPlayer = FindFirstObjectByType<DogPlayer>();
+            m_basePlayer = FindFirstObjectByType<BasePlayer>();
             m_cellManager = FindFirstObjectByType<CellManager>();
 
-            //Force to suscribe CellManager to Dogplayer Event
-            if (m_cellManager != null && m_dogPlayer != null)
+            //Force to suscribe CellManager to BasePlayer Event
+            if (m_cellManager != null && m_basePlayer != null)
             {
-                m_cellManager.SubscribeToDogEvents(m_dogPlayer);
-            }
-
-            yield return new WaitForEndOfFrame();
-
-            if (m_dogPlayer != null)
-            {
-                m_dogPlayer.ReadIdCell();
+                m_cellManager.SubscribeToDogEvents(m_basePlayer);
             }
         }
     }
