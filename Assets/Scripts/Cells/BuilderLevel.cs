@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Mathematics;
 
 namespace Assets.Scripts.Cells
 {
@@ -6,6 +7,7 @@ namespace Assets.Scripts.Cells
     {
         // =================================== FIELDS ===================================
         [SerializeField] private GameObject m_cellPrefab;
+        [SerializeField] private GameObject m_dogPrefab;
 
         // =================================== PUBLIC METHODS ===================================
         public void MakeLevel()
@@ -34,6 +36,13 @@ namespace Assets.Scripts.Cells
 
                 i++;
             }
+        }
+
+        public void InstantiateCharactersAndObjects()
+        {
+            //Dog
+            Vector3 dogPosition = new(0f, 0.1f, 10f);
+            GameObject dogInstantiatePrefab = Instantiate(m_dogPrefab, dogPosition, quaternion.identity);
         }
 
     }
