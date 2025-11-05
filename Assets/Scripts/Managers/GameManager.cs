@@ -11,6 +11,7 @@ namespace Assets.Scripts.Managers
         private static GameManager m_instance;
         private BuilderLevel m_builderLevel;
         private DogPlayer m_dogPlayer;
+        private CellManager m_cellManager;
 
         // =================================== PROPERTIES ===================================
         public static GameManager Instance
@@ -22,7 +23,6 @@ namespace Assets.Scripts.Managers
         // =================================== PRIVATE METHODS ===================================
         private void Awake()
         {
-            // Singleton pattern
             if (Instance != null && Instance != this)
             {
                 Destroy(gameObject);
@@ -31,7 +31,6 @@ namespace Assets.Scripts.Managers
             Instance = this;
 
             m_builderLevel = FindFirstObjectByType<BuilderLevel>();
-            m_dogPlayer = FindFirstObjectByType<DogPlayer>();
         }
 
         private void Start()
@@ -47,6 +46,21 @@ namespace Assets.Scripts.Managers
 
         private IEnumerator InitializeAfterLevelBuilt()
         {
+            yield return new WaitForEndOfFrame();
+
+            m_builderLevel.InstantiateCharactersAndObjects();
+
+            yield return new WaitForEndOfFrame();
+
+            m_dogPlayer = FindFirstObjectByType<DogPlayer>();
+            m_cellManager = FindFirstObjectByType<CellManager>();
+
+            //Force to suscribe CellManager to Dogplayer Event
+            if (m_cellManager != null && m_dogPlayer != null)
+            {
+                m_cellManager.SubscribeToDogEvents(m_dogPlayer);
+            }
+
             yield return new WaitForEndOfFrame();
 
             if (m_dogPlayer != null)
