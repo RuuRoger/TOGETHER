@@ -1,38 +1,32 @@
 <mxfile host="65bd71144e">
     <diagram id="KJbrXDayke7te1iZu8gN" name="Página-1">
-        <mxGraphModel dx="1340" dy="609" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1032" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="6" value="1. GameManager llama a BuilderLevel" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="70" y="60" width="140" height="100" as="geometry"/>
+                <mxCell id="12" value="1. GameManager llama a BuilderLevel" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="10" width="140" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="7" value="2. BuilderLevel Instancia las celdas y crea sus ID" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="70" y="110" width="140" height="100" as="geometry"/>
+                <mxCell id="13" value="2. BuilderLevel Instancia las celdas y crea sus ID" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="10" y="70" width="140" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="8" value="3. GameManger espera a que termine BuilderLevel y hace que el player lea su posición" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="70" y="180" width="140" height="100" as="geometry"/>
+                <mxCell id="14" value="3. BuilderLevel Seguidamente debería Instanciar a los personajes" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="10" y="140" width="140" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="9" value="3. GameManger espera a que termine BuilderLevel y hace que el DogPlayer lea su posición" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="70" y="270" width="140" height="100" as="geometry"/>
+                <mxCell id="15" value="4. BasePlayer Activa la lectura de su celda cuando es seleccionado con el raton el player" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="5" y="230" width="140" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="10" value="4. DogPlayer avisa al cellManager de su posición" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="60" y="360" width="140" height="100" as="geometry"/>
+                <mxCell id="16" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="1" vertex="1">
+                    <mxGeometry y="222" width="150" height="8" as="geometry"/>
                 </mxCell>
-                <mxCell id="11" value="5. CellManager avisa a todas las celdas de la posición de DogPlayer y se vuelven accesibles y cambian de color según esta información" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="70" y="440" width="140" height="100" as="geometry"/>
+                <mxCell id="17" value="5. CellManager recibe la posicion del player para avisar a Cell las posiciones accesibles y colorear las celdas" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="10" y="310" width="140" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="12" value="1. GameManager llama a BuilderLevel" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="260" y="60" width="140" height="100" as="geometry"/>
+                <mxCell id="18" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="1">
+                    <mxGeometry y="400" width="150" height="8" as="geometry"/>
                 </mxCell>
-                <mxCell id="13" value="2. BuilderLevel Instancia las celdas y crea sus ID" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="260" y="110" width="140" height="90" as="geometry"/>
-                </mxCell>
-                <mxCell id="14" value="3. BuilderLevel Seguidamente debería Instanciar a los personajes" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="260" y="170" width="140" height="90" as="geometry"/>
-                </mxCell>
-                <mxCell id="15" value="Debo hacer que solo se cooloreen si selecciono al perro" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="260" y="280" width="140" height="90" as="geometry"/>
+                <mxCell id="19" value="WIP:&lt;br&gt;Lo que necesito es que el personaje se mueva a una celda accesible&lt;br&gt;&lt;br&gt;Luego necesitare que sean los 2 jugadores y qy epueda haber turnos&lt;br&gt;&lt;br&gt;Luego pondre unos zombies que se moveran de foma estudiada&lt;br&gt;&lt;br&gt;**¿? COmo hago que me sigan /ataquen?&lt;br&gt;&lt;br&gt;Luego debere crear los turnos y el pdoer atacar yo" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="360" y="160" width="140" height="90" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
