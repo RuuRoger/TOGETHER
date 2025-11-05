@@ -13,15 +13,6 @@ namespace Assets.Scripts.Managers
         public event Action<Vector2> OnStartTurn; //Goes to 'Cell.cs'
 
         // =================================== EVENTS SUSCRIPTIONS ===================================
-
-        private void OnEnable()
-        {
-            if (m_dog != null)
-            {
-                m_dog.OnDogPosition += HandlerAccesibleCells;
-            }
-        }
-
         private void OnDisable()
         {
             if (m_dog != null)
@@ -30,11 +21,17 @@ namespace Assets.Scripts.Managers
             }
         }
 
-        // =================================== PRIVATE METHODS ===================================
-        private void Awake()
+        // =================================== PUBLIC METHODS ===================================
+        public void SubscribeToDogEvents(DogPlayer dog)
         {
-            m_dog = FindFirstObjectByType<DogPlayer>();
+            if (dog != null)
+            {
+                m_dog = dog;
+                m_dog.OnDogPosition += HandlerAccesibleCells;
+            }
         }
+
+        // =================================== PRIVATE METHODS ===================================
 
         private void HandlerAccesibleCells(Vector2 dogIdCell)
         {
