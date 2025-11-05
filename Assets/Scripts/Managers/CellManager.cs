@@ -7,7 +7,7 @@ namespace Assets.Scripts.Managers
     public class CellManager : MonoBehaviour
     {
         // =================================== FIELDS ===================================
-        private DogPlayer m_dog;
+        private BasePlayer m_basPlayer;
 
         // =================================== EVENTS ===================================
         public event Action<Vector2> OnStartTurn; //Goes to 'Cell.cs'
@@ -15,27 +15,27 @@ namespace Assets.Scripts.Managers
         // =================================== EVENTS SUSCRIPTIONS ===================================
         private void OnDisable()
         {
-            if (m_dog != null)
+            if (m_basPlayer != null)
             {
-                m_dog.OnDogPosition -= HandlerAccesibleCells;
+                m_basPlayer.OnPlayerPosition -= HandlerAccesibleCells;
             }
         }
 
         // =================================== PUBLIC METHODS ===================================
-        public void SubscribeToDogEvents(DogPlayer dog)
+        public void SubscribeToDogEvents(BasePlayer player)
         {
-            if (dog != null)
+            if (player != null)
             {
-                m_dog = dog;
-                m_dog.OnDogPosition += HandlerAccesibleCells;
+                m_basPlayer = player;
+                m_basPlayer.OnPlayerPosition += HandlerAccesibleCells;
             }
         }
 
         // =================================== PRIVATE METHODS ===================================
 
-        private void HandlerAccesibleCells(Vector2 dogIdCell)
+        private void HandlerAccesibleCells(Vector2 playerIdCell)
         {
-            OnStartTurn?.Invoke(dogIdCell);
+            OnStartTurn?.Invoke(playerIdCell);
         }
     }
 }
