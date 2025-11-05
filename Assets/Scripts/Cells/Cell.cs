@@ -22,14 +22,6 @@ namespace Assets.Scripts.Cells
         }
 
         // =================================== EVENTS SUSCRIPTIONS ===================================
-        private void OnEnable()
-        {
-            if (m_cellManger != null)
-            {
-                m_cellManger.OnStartTurn += CheckCellAccessibility;
-            }
-        }
-
         private void OnDisable()
         {
             if (m_cellManger != null)
@@ -49,6 +41,11 @@ namespace Assets.Scripts.Cells
         private void Start()
         {
             m_render.material.color = m_cellGreenColor;
+            m_cellManger ??= FindFirstObjectByType<CellManager>();
+            if (m_cellManger != null)
+            {
+                m_cellManger.OnStartTurn += CheckCellAccessibility;
+            }
         }
 
         private void OnMouseDown()
