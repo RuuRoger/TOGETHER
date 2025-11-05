@@ -4,13 +4,18 @@ using Assets.Scripts.Cells;
 
 namespace Assets.Scripts.Players
 {
-    public class DogPlayer : MonoBehaviour
+    public class BasePlayer : MonoBehaviour
     {
         // =================================== EVENTS ===================================
-        public event Action<Vector2> OnDogPosition; //Goes to CellManager
+        public event Action<Vector2> OnPlayerPosition; //Goes to CellManager
 
-        // =================================== PUBLIC METHODS ===================================
-        public void ReadIdCell()
+        // =================================== PRIVATE METHODS ===================================
+        private void OnMouseDown()
+        {
+            ReadIdCell();
+        }
+
+        private void ReadIdCell()
         {
             Ray ray = new(transform.position, Vector3.down);
             RaycastHit hit;
@@ -21,7 +26,7 @@ namespace Assets.Scripts.Players
                 if (cell != null)
                 {
                     Vector2 idCell = cell.IDCell;
-                    OnDogPosition?.Invoke(idCell);
+                    OnPlayerPosition?.Invoke(idCell);
                 }
             }
         }
