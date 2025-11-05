@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Assets.Scripts.Players;
+using Assets.Scripts.Cells;
 
 namespace Assets.Scripts.Managers
 {
@@ -31,8 +32,15 @@ namespace Assets.Scripts.Managers
             }
         }
 
-        // =================================== PRIVATE METHODS ===================================
+        public void ResetAllCellColors()
+        {
+            foreach (Cell cell in FindObjectsByType<Cell>(FindObjectsSortMode.None))
+            {
+                cell.ResetColor();
+            }
+        }
 
+        // =================================== PRIVATE METHODS ===================================
         private void HandlerAccesibleCells(Vector2 playerIdCell)
         {
             OnStartTurn?.Invoke(playerIdCell);
