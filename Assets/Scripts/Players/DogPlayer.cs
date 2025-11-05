@@ -18,8 +18,11 @@ namespace Assets.Scripts.Players
             if (Physics.Raycast(ray, out hit, 5f))
             {
                 Cell cell = hit.collider.GetComponent<Cell>();
-                Vector2 idCell = cell.IDCell;
-                OnDogPosition?.Invoke(idCell);
+                if (cell != null)
+                {
+                    Vector2 idCell = cell.IDCell;
+                    OnDogPosition?.Invoke(idCell);
+                }
             }
         }
     }
