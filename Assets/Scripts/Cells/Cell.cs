@@ -30,6 +30,13 @@ namespace Assets.Scripts.Cells
             }
         }
 
+        // =================================== PUBLIC METHODS ===================================
+        public void ResetColor()
+        {
+            m_isAccesible = false;
+            m_render.material.color = m_cellGreenColor;
+        }
+
         // =================================== PRIVATE METHODS ===================================
         private void Awake()
         {
@@ -50,7 +57,10 @@ namespace Assets.Scripts.Cells
 
         private void OnMouseDown()
         {
-            Debug.Log(IDCell);
+            if (!m_isAccesible)
+            {
+                m_cellManger.ResetAllCellColors();
+            }
         }
 
         private void CheckCellAccessibility(Vector2 dogCellID)
