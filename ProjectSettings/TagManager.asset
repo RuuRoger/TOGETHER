@@ -10,7 +10,7 @@ TagManager:
   - Fire
   - Ice
   - Dark
-  - Dog
+  - DogPlayer
   - CellManager
   layers:
   - Default
