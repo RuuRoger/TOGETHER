@@ -58,7 +58,7 @@ namespace Assets.Scripts.Managers
             //Force to suscribe CellManager to BasePlayer Event
             if (m_cellManager != null && m_basePlayer != null)
             {
-                m_cellManager.SubscribeToDogEvents(m_basePlayer);
+                m_cellManager.SubscribeToBasePlayerEvents(m_basePlayer);
             }
         }
     }
