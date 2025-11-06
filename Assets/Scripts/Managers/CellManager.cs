@@ -23,8 +23,9 @@ namespace Assets.Scripts.Managers
         }
 
         // =================================== PUBLIC METHODS ===================================
-        public void SubscribeToDogEvents(BasePlayer player)
+        public void SubscribeToBasePlayerEvents(BasePlayer player)
         {
+
             if (player != null)
             {
                 m_basPlayer = player;
@@ -34,6 +35,8 @@ namespace Assets.Scripts.Managers
 
         public void ResetAllCellColors()
         {
+            ChangeBasePlayerSelection();
+
             foreach (Cell cell in FindObjectsByType<Cell>(FindObjectsSortMode.None))
             {
                 cell.ResetColor();
@@ -44,6 +47,11 @@ namespace Assets.Scripts.Managers
         private void HandlerAccesibleCells(Vector2 playerIdCell)
         {
             OnStartTurn?.Invoke(playerIdCell);
+        }
+
+        private void ChangeBasePlayerSelection()
+        {
+            m_basPlayer.IsSelected = false;
         }
     }
 }
