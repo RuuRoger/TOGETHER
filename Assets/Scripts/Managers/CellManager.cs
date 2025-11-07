@@ -18,7 +18,7 @@ namespace Assets.Scripts.Managers
         {
             if (m_basPlayer != null)
             {
-                m_basPlayer.OnPlayerPosition -= HandlerAccesibleCells;
+                m_basPlayer.OnIDCellPlayer -= HandlerAccesibleCells;
             }
         }
 
@@ -29,7 +29,7 @@ namespace Assets.Scripts.Managers
             if (player != null)
             {
                 m_basPlayer = player;
-                m_basPlayer.OnPlayerPosition += HandlerAccesibleCells;
+                m_basPlayer.OnIDCellPlayer += HandlerAccesibleCells;
             }
         }
 
