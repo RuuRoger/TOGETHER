@@ -7,9 +7,16 @@ namespace Assets.Scripts.Players
     public class BasePlayer : MonoBehaviour
     {
         // =================================== FIELDS ===================================
+        private Transform m_currentPosition;
         private bool m_isSelected = false;
 
         // =================================== PROPERTIES ===================================
+        //Maybe this is not necessary...
+        public Transform CurrentPosition
+        {
+            get { return m_currentPosition; }
+            set { m_currentPosition = value; }
+        }
         public bool IsSelected
         {
             get { return m_isSelected; }
@@ -17,13 +24,20 @@ namespace Assets.Scripts.Players
         }
 
         // =================================== EVENTS ===================================
-        public event Action<Vector2> OnPlayerPosition; //Goes to CellManager
+        public event Action<Vector2> OnIDCellPlayer; //Goes to CellManager
+        public event Action<bool> OnPlayerSelected; //Goes to PlayerManager
 
         // =================================== PRIVATE METHODS ===================================
         private void OnMouseDown()
         {
             m_isSelected = true;
+            PlayerIsSelected();
             ReadIdCell();
+        }
+
+        private void PlayerIsSelected()
+        {
+            OnPlayerSelected?.Invoke(m_isSelected);
         }
 
         private void ReadIdCell()
@@ -37,7 +51,7 @@ namespace Assets.Scripts.Players
                 if (cell != null)
                 {
                     Vector2 idCell = cell.IDCell;
-                    OnPlayerPosition?.Invoke(idCell);
+                    OnIDCellPlayer?.Invoke(idCell);
                 }
             }
         }
