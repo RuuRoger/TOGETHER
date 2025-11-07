@@ -11,6 +11,13 @@ namespace Assets.Scripts.Managers
         private BasePlayer m_human;
         private BasePlayer m_dog;
 
+        // =================================== EVENTS SUSCRIPTIONS ===================================
+        public void SuscriptionToBasePlayerEvents()
+        {
+
+        }
+
+        // =================================== PUBLIC METHODS ===================================
         public void PlayersInitialation()
         {
             GameObject humanObject = GameObject.FindGameObjectWithTag("Player");
@@ -18,5 +25,12 @@ namespace Assets.Scripts.Managers
             m_human = humanObject.GetComponent<BasePlayer>();
             m_dog = dogObject.GetComponent<BasePlayer>();
         }
+
+        // =================================== PRIVATE METHODS ===================================
+        private void PlayerIsSelected()
+        {
+
+        }
+
     }
 }
