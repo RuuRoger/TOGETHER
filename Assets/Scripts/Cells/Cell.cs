@@ -22,6 +22,15 @@ namespace Assets.Scripts.Cells
         }
 
         // =================================== EVENTS SUSCRIPTIONS ===================================
+        private void Start()
+        {
+            m_render.material.color = m_cellGreenColor;
+            m_cellManger ??= FindFirstObjectByType<CellManager>();
+            if (m_cellManger != null)
+            {
+                m_cellManger.OnStartTurn += CheckCellAccessibility;
+            }
+        }
         private void OnDisable()
         {
             if (m_cellManger != null)
@@ -45,15 +54,6 @@ namespace Assets.Scripts.Cells
             m_cellManger = FindFirstObjectByType<CellManager>();
         }
 
-        private void Start()
-        {
-            m_render.material.color = m_cellGreenColor;
-            m_cellManger ??= FindFirstObjectByType<CellManager>();
-            if (m_cellManger != null)
-            {
-                m_cellManger.OnStartTurn += CheckCellAccessibility;
-            }
-        }
 
         private void OnMouseDown()
         {
