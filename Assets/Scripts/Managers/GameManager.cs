@@ -12,6 +12,7 @@ namespace Assets.Scripts.Managers
         private BuilderLevel m_builderLevel;
         private BasePlayer m_basePlayer;
         private CellManager m_cellManager;
+        private PlayerManager m_playerManager;
 
         // =================================== PROPERTIES ===================================
         public static GameManager Instance
@@ -60,6 +61,11 @@ namespace Assets.Scripts.Managers
             {
                 m_cellManager.SubscribeToBasePlayerEvents(m_basePlayer);
             }
+
+            yield return new WaitForEndOfFrame();
+
+            m_playerManager = FindFirstObjectByType<PlayerManager>();
+            m_playerManager.PlayersInitialation();
         }
     }
 }
