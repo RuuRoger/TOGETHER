@@ -9,6 +9,11 @@ namespace Assets.Scripts.Cells
         [SerializeField] private GameObject m_dogPrefab;
 
         // ================================================== PUBLIC METHODS ==================================================
+
+        ///<Summary>
+        /// Create a grid
+        /// For each cell created, make an ID cell
+        ///</Summary
         public void MakeLevel()
         {
             int i = 1; // row
@@ -43,6 +48,12 @@ namespace Assets.Scripts.Cells
             Vector3 dogPosition = new(0f, 0.1f, 10f);
             Quaternion dogRotation = Quaternion.Euler(0f, 90f, 0);
             GameObject dogInstantiatePrefab = Instantiate(m_dogPrefab, dogPosition, dogRotation);
+        }
+
+        // ================================================== PRIVATE METHODS ==================================================
+        private void Start()
+        {
+            MakeLevel();
         }
     }
 }
