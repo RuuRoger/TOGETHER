@@ -6,11 +6,11 @@ namespace Assets.Scripts.Players
 {
     public class BasePlayer : MonoBehaviour
     {
-        // =================================== FIELDS ===================================
+        // ================================================== FIELDS ==================================================
         private Transform m_currentPosition;
         private bool m_isSelected = false;
 
-        // =================================== PROPERTIES ===================================
+        // ================================================== PROPERTIES ==================================================
         //Maybe this is not necessary...
         public Transform CurrentPosition
         {
@@ -23,11 +23,11 @@ namespace Assets.Scripts.Players
             set { m_isSelected = value; }
         }
 
-        // =================================== EVENTS ===================================
+        // ================================================== EVENTS ==================================================
         public event Action<Vector2> OnIDCellPlayer; //Goes to CellManager
         public event Action<bool> OnPlayerSelected; //Goes to PlayerManager
 
-        // =================================== PRIVATE METHODS ===================================
+        // ================================================== PRIVATE METHODS ==================================================
         private void OnMouseDown()
         {
             m_isSelected = true;

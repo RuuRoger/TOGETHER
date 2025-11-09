@@ -4,11 +4,11 @@ namespace Assets.Scripts.Cells
 {
     public class BuilderLevel : MonoBehaviour
     {
-        // =================================== FIELDS ===================================
+        // ================================================== FIELDS ==================================================
         [SerializeField] private GameObject m_cellPrefab;
         [SerializeField] private GameObject m_dogPrefab;
 
-        // =================================== PUBLIC METHODS ===================================
+        // ================================================== PUBLIC METHODS ==================================================
         public void MakeLevel()
         {
             int i = 1; // row

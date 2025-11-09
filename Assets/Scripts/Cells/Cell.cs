@@ -59,7 +59,7 @@ namespace Assets.Scripts.Cells
         {
             if (!m_isAccesible)
             {
-                m_cellManger.ResetAllCellColors();
+                m_cellManger.ResetStatus();
             }
         }
 
