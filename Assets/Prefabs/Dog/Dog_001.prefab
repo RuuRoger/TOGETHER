@@ -454,7 +454,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3402305891407841116}
-  - component: {fileID: 7170205680535626091}
+  - component: {fileID: 649497249509508746}
   - component: {fileID: 120674175278399982}
   - component: {fileID: 9003410764456430701}
   m_Layer: 0
@@ -481,7 +481,7 @@ Transform:
   - {fileID: 3946947937595085479}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &7170205680535626091
+--- !u!114 &649497249509508746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -490,9 +490,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2629182449500102118}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8574c77e283c99847a0de05e8f168e10, type: 3}
+  m_Script: {fileID: 11500000, guid: 68ce60277b502da4cbc9139685fe5dd7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Players.DogPlayer
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Players.BasePlayer
 --- !u!143 &120674175278399982
 CharacterController:
   m_ObjectHideFlags: 0
