@@ -1,3 +1,4 @@
+using Assets.Scripts.Managers;
 using UnityEngine;
 
 namespace Assets.Scripts.Cells
@@ -13,6 +14,7 @@ namespace Assets.Scripts.Cells
         ///<Summary>
         /// Create a grid
         /// For each cell created, make an ID cell
+        /// Also, add every cell in a list in CellManager
         ///</Summary
         public void MakeLevel()
         {
@@ -35,6 +37,9 @@ namespace Assets.Scripts.Cells
                     Vector2 id = new(j, i);
                     cellComponent.IDCell = id;
 
+                    //Add to CellManager list
+                    CellManager.Instance.AddCell(cellComponent);
+
                     j++;
                 }
 
@@ -54,6 +59,7 @@ namespace Assets.Scripts.Cells
         private void Start()
         {
             MakeLevel();
+            InstantiateCharactersAndObjects();
         }
     }
 }
