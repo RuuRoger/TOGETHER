@@ -8,30 +8,22 @@ namespace Assets.Scripts.Players
 {
     public class BasePlayer : MonoBehaviour
     {
+        // ================================================== FIELDS ==================================================
+        private bool m_isSelected = false;
+
+        // ================================================== PROPERTIES ==================================================
+        public bool IsSelected
+        {
+            get { return m_isSelected; }
+            set { m_isSelected = value; }
+        }
+
         // ================================================== PRIVATE METHODS ==================================================
         private void OnMouseDown()
         {
-            ReadIdCell();
-        }
-
-        ///<summary>
-        /// Trhow a raycast to read ID Cell
-        /// Notofy to CellManager wich ID is
-        ///</summary>
-        private void ReadIdCell()
-        {
-            Ray ray = new(transform.position, Vector3.down);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 5f))
-            {
-                Cell cell = hit.collider.GetComponent<Cell>();
-                if (cell != null)
-                {
-                    Vector2 idCell = cell.IDCell;
-                    CellManager.Instance.NotifyChangeColorAccesibleCells(idCell);
-                }
-            }
+            m_isSelected = true;
+            string playerTag = gameObject.tag;
+            PlayerManager.Instance.PlayerSelected(playerTag);
         }
     }
 }
