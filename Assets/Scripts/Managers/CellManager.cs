@@ -25,13 +25,13 @@ namespace Assets.Scripts.Managers
         }
 
         ///<summary>
-        /// Iterate each cell to dog's IDcell
+        /// Iterate each cell to players's IDcell
         ///</summary>
-        public void NotifyChangeColorAccesibleCells(Vector2 idDogCell)
+        public void NotifyChangeColorAccesibleCells(Vector2 idPlayerCell)
         {
             foreach (var cell in m_cells)
             {
-                cell.ChangeColorAccesibleCells(idDogCell);
+                cell.ChangeColorAccesibleCells(idPlayerCell);
             }
         }
 
