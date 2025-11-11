@@ -1,4 +1,5 @@
 using System;
+using Assets.Scripts.Managers;
 using UnityEngine;
 
 namespace Assets.Scripts.Cells
@@ -25,10 +26,11 @@ namespace Assets.Scripts.Cells
             set { m_isAccesible = value; }
         }
 
-        public void ChangeColorAccesibleCells(Vector2 idDogCell)
+        public void ChangeColorAccesibleCells(Vector2 idPlayerCell)
         {
-            float distanceX = Math.Abs(idDogCell.x - IDCell.x);
-            float distanceY = Math.Abs(idDogCell.y - IDCell.y);
+            float distanceX = Math.Abs(idPlayerCell.x - IDCell.x);
+            float distanceY = Math.Abs(idPlayerCell.y - IDCell.y);
+
 
             if (distanceX <= 2f && distanceY <= 2f)
             {
@@ -46,6 +48,11 @@ namespace Assets.Scripts.Cells
         private void Awake()
         {
             m_cellRender = GetComponent<Renderer>();
+        }
+
+        private void OnMouseDown()
+        {
+
         }
     }
 }
