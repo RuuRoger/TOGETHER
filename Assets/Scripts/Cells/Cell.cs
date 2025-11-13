@@ -63,6 +63,23 @@ namespace Assets.Scripts.Cells
             {
                 CellManager.Instance.ResetAllCellsColors();
             }
+            else
+            {
+                Vector3 currentCellPosition = this.transform.position;
+                CellManager.Instance.GetDestinationCellPosition(currentCellPosition);
+                Debug.Log("has seleccionado una celda accesible"); // FUNCIONA
+            }
         }
     }
+
+    /*
+        TODO: HAY QUE DEBUGGEAR QUE PAAS Y POR QUÉ NO SE MUEVE....
+        HAY QUE VERIFICAR:
+        1. ¿ONMOUSE DE CELL FUNCIONA? => SI
+        2. ¿RECOGE LA POSICION?
+        3. ¿SE ENVÍA CORRECTAMENTE A SU MANAGER?
+        4. ¿LO RECIBE CORRECTAMENTE EL MAANGER DEL PLAYER?
+        5. ¿sE ENVIA CORRECTAMENTE AL PLAYER?
+        6. ¿PASA ALGO FUERA DE ESTO? 
+    */
 }
