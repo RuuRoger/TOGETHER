@@ -10,6 +10,7 @@ namespace Assets.Scripts.Managers
     {
         // ================================================== FIELDS ==================================================
         private static PlayerManager m_instance;
+        private BasePlayer m_player;
 
         // ================================================== PROPERTIES ==================================================
         public static PlayerManager Instance
@@ -19,6 +20,14 @@ namespace Assets.Scripts.Managers
         }
 
         // ================================================== PUBLIC METHODS ==================================================
+        public void GetPlayer()
+        {
+            if (m_player == null)
+            {
+                m_player = FindFirstObjectByType<BasePlayer>();
+            }
+        }
+
         public void PlayerSelected(string playerTag)
         {
             GameObject player = GameObject.FindGameObjectWithTag(playerTag);
@@ -26,7 +35,11 @@ namespace Assets.Scripts.Managers
             Vector2 idCell = ReadPlayerIdCell(player);
 
             CellManager.Instance.NotifyChangeColorAccesibleCells(idCell);
+        }
 
+        public void NotifyToPlayerCellDestination(Vector3 cellDestinationPosition)
+        {
+            m_player.MovePlayerToCell(cellDestinationPosition);
         }
 
         // ================================================== PRIVATE METHODS ==================================================
