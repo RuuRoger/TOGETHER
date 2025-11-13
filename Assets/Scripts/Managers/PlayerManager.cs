@@ -40,6 +40,7 @@ namespace Assets.Scripts.Managers
         public void NotifyToPlayerCellDestination(Vector3 cellDestinationPosition)
         {
             m_player.MovePlayerToCell(cellDestinationPosition);
+            m_player.IsSelected = false;
         }
 
         // ================================================== PRIVATE METHODS ==================================================
