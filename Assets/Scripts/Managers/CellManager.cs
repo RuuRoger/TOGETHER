@@ -43,6 +43,11 @@ namespace Assets.Scripts.Managers
             }
         }
 
+        public void GetDestinationCellPosition(Vector3 destinationCellPosition)
+        {
+            PlayerManager.Instance.NotifyToPlayerCellDestination(destinationCellPosition);
+        }
+
         // ================================================== PRIVATE METHODS ==================================================
         private void Awake()
         {
