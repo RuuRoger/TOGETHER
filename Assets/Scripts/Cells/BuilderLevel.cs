@@ -53,6 +53,7 @@ namespace Assets.Scripts.Cells
             Vector3 dogPosition = new(0f, 0.1f, 10f);
             Quaternion dogRotation = Quaternion.Euler(0f, 90f, 0);
             GameObject dogInstantiatePrefab = Instantiate(m_dogPrefab, dogPosition, dogRotation);
+            PlayerManager.Instance.GetPlayer();
         }
 
         // ================================================== PRIVATE METHODS ==================================================
