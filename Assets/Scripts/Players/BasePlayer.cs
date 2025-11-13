@@ -1,8 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Assets.Scripts.Cells;
 using Assets.Scripts.Managers;
+using Unity.VisualScripting;
 
 namespace Assets.Scripts.Players
 {
@@ -10,6 +11,7 @@ namespace Assets.Scripts.Players
     {
         // ================================================== FIELDS ==================================================
         private bool m_isSelected = false;
+        private bool m_isMoving = false;
 
         // ================================================== PROPERTIES ==================================================
         public bool IsSelected
@@ -21,9 +23,9 @@ namespace Assets.Scripts.Players
         // ================================================== PUBLIC METHODS ==================================================
         public void MovePlayerToCell(Vector3 cellDestination)
         {
-            if (m_isSelected)
+            if (m_isSelected && !m_isMoving)
             {
-                transform.position = Vector3.MoveTowards(transform.position, cellDestination, 3f * Time.deltaTime);
+                StartCoroutine(MoveToCell(cellDestination));
             }
         }
 
@@ -33,6 +35,25 @@ namespace Assets.Scripts.Players
             m_isSelected = true;
             string playerTag = gameObject.tag;
             PlayerManager.Instance.PlayerSelected(playerTag);
+        }
+
+        private IEnumerator MoveToCell(Vector3 destination)
+        {
+            m_isMoving = true;
+
+            while (Vector3.Distance(transform.position, destination) > 0.1f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, destination, 3f * Time.deltaTime);
+                yield return null;
+            }
+
+            //To Make sure the player is in cell position
+            transform.position = destination;
+
+            CellManager.Instance.ResetAllCellsColors();
+
+            m_isMoving = false;
+
         }
     }
 }
