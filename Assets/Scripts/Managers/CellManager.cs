@@ -35,6 +35,14 @@ namespace Assets.Scripts.Managers
             }
         }
 
+        public void ResetAllCellsColors()
+        {
+            foreach (var cell in m_cells)
+            {
+                cell.ResetAllColors();
+            }
+        }
+
         // ================================================== PRIVATE METHODS ==================================================
         private void Awake()
         {
