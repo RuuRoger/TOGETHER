@@ -18,6 +18,15 @@ namespace Assets.Scripts.Players
             set { m_isSelected = value; }
         }
 
+        // ================================================== PUBLIC METHODS ==================================================
+        public void MovePlayerToCell(Vector3 cellDestination)
+        {
+            if (m_isSelected)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, cellDestination, 3f * Time.deltaTime);
+            }
+        }
+
         // ================================================== PRIVATE METHODS ==================================================
         private void OnMouseDown()
         {
