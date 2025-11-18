@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.Managers;
-using Unity.VisualScripting;
 
 namespace Assets.Scripts.Players
 {
@@ -47,13 +46,12 @@ namespace Assets.Scripts.Players
                 yield return null;
             }
 
-            //To Make sure the player is in cell position
+            //Fix position. Make "pefect" the destination position
             transform.position = destination;
 
             CellManager.Instance.ResetAllCellsColors();
 
             m_isMoving = false;
-
         }
     }
 }
