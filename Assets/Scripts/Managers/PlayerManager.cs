@@ -57,7 +57,12 @@ namespace Assets.Scripts.Managers
 
         private Vector2 ReadPlayerIdCell(GameObject player)
         {
-            Ray ray = new(player.transform.position, Vector3.down);
+            /*
+            ¡¡¡IMPORTANT!!!
+            It's very important add "Vector3.up * 0.5f" because made probles and bugs without this.
+            This is because if dog coudn't works correctly the raycast, the game turns crazy with the movement
+            */
+            Ray ray = new(player.transform.position + Vector3.up * 0.5f, Vector3.down);
             RaycastHit hit;
 
             Vector2 idCell = Vector2.zero; //Default Value
