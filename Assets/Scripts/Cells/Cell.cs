@@ -32,7 +32,6 @@ namespace Assets.Scripts.Cells
             float distanceX = Math.Abs(idPlayerCell.x - IDCell.x);
             float distanceY = Math.Abs(idPlayerCell.y - IDCell.y);
 
-
             if (distanceX <= 2f && distanceY <= 2f)
             {
                 m_isAccesible = true;
