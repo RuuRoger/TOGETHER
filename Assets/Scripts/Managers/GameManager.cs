@@ -26,6 +26,5 @@ namespace Assets.Scripts.Managers
             }
             Instance = this;
         }
-
     }
 }
