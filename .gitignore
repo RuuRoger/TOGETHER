@@ -34,3 +34,5 @@ UserSettings/
 *.swp
 *Wip.md
 *.txt
+.vs/
+.vsconfig
