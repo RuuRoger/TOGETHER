@@ -16,8 +16,6 @@ namespace Assets.Scripts.Cells
         /// Also, add every cell in a list in CellManager
         ///</Summary
         
-        //Testing
-
         public void MakeLevel()
         {
             int i = 1; // row
