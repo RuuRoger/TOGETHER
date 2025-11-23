@@ -10,12 +10,14 @@ namespace Assets.Scripts.Cells
         [SerializeField] private GameObject m_dogPrefab;
 
         // ================================================== PUBLIC METHODS ==================================================
-
         ///<Summary>
         /// Create a grid
         /// For each cell created, make an ID cell
         /// Also, add every cell in a list in CellManager
         ///</Summary
+        
+        //Testing
+
         public void MakeLevel()
         {
             int i = 1; // row
