@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.Managers;
+using UnityEngine.AI;
 
 namespace Assets.Scripts.Players
 {
@@ -40,13 +41,20 @@ namespace Assets.Scripts.Players
         {
             m_isMoving = true;
 
-            while (Vector3.Distance(transform.position, destination) > 0.1f)
+            NavMeshAgent agent = GetComponent<NavMeshAgent>();
+            if (agent != null && agent.enabled)
             {
-                transform.position = Vector3.MoveTowards(transform.position, destination, 3f * Time.deltaTime);
-                yield return null;
+                //Now the the navemesh move the player
+                agent.SetDestination(destination);
+                
+                // while calculating or more distance than 0.1
+                while (agent.pathPending || agent.remainingDistance > 0.1f)
+                {
+                    yield return null;
+                }
             }
 
-            //Fix position. Make "pefect" the destination position
+            //Fix the position in last step
             transform.position = destination;
 
             CellManager.Instance.ResetAllCellsColors();

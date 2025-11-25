@@ -1,6 +1,7 @@
 using System;
 using Assets.Scripts.Managers;
 using UnityEngine;
+using Unity.AI.Navigation;
 
 namespace Assets.Scripts.Cells
 {
@@ -9,9 +10,10 @@ namespace Assets.Scripts.Cells
         // ================================================== FIELDS ==================================================
         private Vector3 m_halfExtents = new Vector3(0.5f, 0.5f, 0.5f);
         private Vector2 m_idCell;
-        private Renderer m_cellRender;
         private Color m_greenColour = new(0.4f, 0.7f, 0.2f);
         private Color m_blueColour = new(0.2f, 0.7f, 0.7f);
+        private Renderer m_cellRender;
+        private NavMeshModifier m_naveMeshModifier;
         private bool m_isAccesible = false;
 
         // ================================================== PROPERTIES ==================================================
@@ -42,7 +44,7 @@ namespace Assets.Scripts.Cells
             float distanceX = Math.Abs(idPlayerCell.x - IDCell.x);
             float distanceY = Math.Abs(idPlayerCell.y - IDCell.y);
 
-            if (distanceX <= 1f && distanceY <= 1f)
+            if (distanceX <= 2f && distanceY <= 2f)
             {
                 Vector3 boxCenter = transform.position + Vector3.up * 0.5f;
                 Collider[] colliders = Physics.OverlapBox(boxCenter, m_halfExtents);
@@ -61,11 +63,13 @@ namespace Assets.Scripts.Cells
                 {
                     m_isAccesible = false;
                     m_cellRender.material.color = m_greenColour;
+                    m_naveMeshModifier.area = 1; //Not "walkeable"
                 }
                 else
                 {
                     m_isAccesible = true;
                     m_cellRender.material.color = m_blueColour;
+                    m_naveMeshModifier.area = 0; // "Walkeable"  
                 }
 
             }
@@ -81,12 +85,14 @@ namespace Assets.Scripts.Cells
         {
             m_isAccesible = false;
             m_cellRender.material.color = m_greenColour;
+            m_naveMeshModifier.area = 1; //Not "walkeable"
         }
 
         // ================================================== PRIVATE METHODS ==================================================
         private void Awake()
         {
             m_cellRender = GetComponent<Renderer>();
+            m_naveMeshModifier = GetComponent<NavMeshModifier>();
         }
 
         private void OnMouseDown()

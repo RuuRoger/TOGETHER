@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Assets.Scripts.Cells;
 using UnityEngine;
+using Unity.AI.Navigation;
+
 
 namespace Assets.Scripts.Managers
 {
@@ -9,6 +11,7 @@ namespace Assets.Scripts.Managers
     {
         // ================================================== FIELDS ==================================================
         private static CellManager m_instance;
+        private NavMeshSurface m_navMeshSurface;
         private List<Cell> m_cells = new List<Cell>();
 
         // ================================================== PROPERTIES ==================================================
@@ -33,6 +36,8 @@ namespace Assets.Scripts.Managers
             {
                 cell.ChangeColorAccesibleCells(idPlayerCell);
             }
+
+            m_navMeshSurface.BuildNavMesh();
         }
 
         public void ResetAllCellsColors()
@@ -58,6 +63,8 @@ namespace Assets.Scripts.Managers
             }
 
             Instance = this;
+
+            m_navMeshSurface = GetComponent<NavMeshSurface>();
         }
     }
 }

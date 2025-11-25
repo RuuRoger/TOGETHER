@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.Players;
 using Assets.Scripts.Cells;
+using UnityEngine.AI;
 
 namespace Assets.Scripts.Managers
 {
@@ -31,10 +33,31 @@ namespace Assets.Scripts.Managers
         public void PlayerSelected(string playerTag)
         {
             GameObject player = GameObject.FindGameObjectWithTag(playerTag);
+            m_player = player.GetComponent<BasePlayer>();
 
             Vector2 idCell = ReadPlayerIdCell(player);
 
+            // diseable agent
+            NavMeshAgent agent = player.GetComponent<NavMeshAgent>();
+            if (agent != null)
+            {
+                agent.enabled = false;
+            }
+
             CellManager.Instance.NotifyChangeColorAccesibleCells(idCell);
+            
+            StartCoroutine(EnableAgentAfterBuild(player));
+        }
+
+        private IEnumerator EnableAgentAfterBuild(GameObject player)
+        {
+            yield return null;
+            
+            NavMeshAgent agent = player.GetComponent<NavMeshAgent>();
+            if (agent != null && !agent.enabled)
+            {
+                agent.enabled = true;
+            }
         }
 
         public void NotifyToPlayerCellDestination(Vector3 cellDestinationPosition)
