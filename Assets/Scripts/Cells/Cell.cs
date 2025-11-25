@@ -42,7 +42,7 @@ namespace Assets.Scripts.Cells
             float distanceX = Math.Abs(idPlayerCell.x - IDCell.x);
             float distanceY = Math.Abs(idPlayerCell.y - IDCell.y);
 
-            if (distanceX <= 1f && distanceY <= 1f)
+            if (distanceX <= 2f && distanceY <= 2f)
             {
                 Vector3 boxCenter = transform.position + Vector3.up * 0.5f;
                 Collider[] colliders = Physics.OverlapBox(boxCenter, m_halfExtents);
