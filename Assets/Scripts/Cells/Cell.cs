@@ -8,12 +8,12 @@ namespace Assets.Scripts.Cells
     public class Cell : MonoBehaviour
     {
         // ================================================== FIELDS ==================================================
-        // private NavMeshSurface m_navMeshSurface;
         private Vector3 m_halfExtents = new Vector3(0.5f, 0.5f, 0.5f);
         private Vector2 m_idCell;
-        private Renderer m_cellRender;
         private Color m_greenColour = new(0.4f, 0.7f, 0.2f);
         private Color m_blueColour = new(0.2f, 0.7f, 0.7f);
+        private Renderer m_cellRender;
+        private NavMeshModifier m_naveMeshModifier;
         private bool m_isAccesible = false;
 
         // ================================================== PROPERTIES ==================================================
@@ -63,12 +63,13 @@ namespace Assets.Scripts.Cells
                 {
                     m_isAccesible = false;
                     m_cellRender.material.color = m_greenColour;
+                    m_naveMeshModifier.area = 1; //Not "walkeable"
                 }
                 else
                 {
                     m_isAccesible = true;
-                    m_cellRender.material.color = m_blueColour;   
-                    // m_navMeshSurface.BuildNavMesh();                 
+                    m_cellRender.material.color = m_blueColour;
+                    m_naveMeshModifier.area = 0; // "Walkeable"  
                 }
 
             }
@@ -84,13 +85,14 @@ namespace Assets.Scripts.Cells
         {
             m_isAccesible = false;
             m_cellRender.material.color = m_greenColour;
+            m_naveMeshModifier.area = 1; //Not "walkeable"
         }
 
         // ================================================== PRIVATE METHODS ==================================================
         private void Awake()
         {
             m_cellRender = GetComponent<Renderer>();
-            // m_navMeshSurface = GetComponent<NavMeshSurface>();
+            m_naveMeshModifier = GetComponent<NavMeshModifier>();
         }
 
         private void OnMouseDown()
