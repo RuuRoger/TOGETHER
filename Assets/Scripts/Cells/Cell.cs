@@ -1,12 +1,14 @@
 using System;
 using Assets.Scripts.Managers;
 using UnityEngine;
+using Unity.AI.Navigation;
 
 namespace Assets.Scripts.Cells
 {
     public class Cell : MonoBehaviour
     {
         // ================================================== FIELDS ==================================================
+        // private NavMeshSurface m_navMeshSurface;
         private Vector3 m_halfExtents = new Vector3(0.5f, 0.5f, 0.5f);
         private Vector2 m_idCell;
         private Renderer m_cellRender;
@@ -65,7 +67,8 @@ namespace Assets.Scripts.Cells
                 else
                 {
                     m_isAccesible = true;
-                    m_cellRender.material.color = m_blueColour;
+                    m_cellRender.material.color = m_blueColour;   
+                    // m_navMeshSurface.BuildNavMesh();                 
                 }
 
             }
@@ -87,6 +90,7 @@ namespace Assets.Scripts.Cells
         private void Awake()
         {
             m_cellRender = GetComponent<Renderer>();
+            // m_navMeshSurface = GetComponent<NavMeshSurface>();
         }
 
         private void OnMouseDown()
