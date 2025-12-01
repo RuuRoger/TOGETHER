@@ -42,19 +42,51 @@ namespace Assets.Scripts.Players
             m_isMoving = true;
 
             NavMeshAgent agent = GetComponent<NavMeshAgent>();
-            if (agent != null && agent.enabled)
+            if (agent != null)
             {
-                //Now the the navemesh move the player
+                agent.enabled = true;
+                
+                // Give time to initialize agent
+                yield return null;
+                yield return null;
+                
+                //this block is to fix potenccial errors
+                if (!agent.isOnNavMesh)
+                {
+                    NavMeshHit hit;
+                    Vector3 searchPos = new Vector3(transform.position.x, 0f, transform.position.z);
+                    
+                    if (NavMesh.SamplePosition(searchPos, out hit, 3f, NavMesh.AllAreas))
+                    {
+                        agent.Warp(hit.position);
+                        transform.position = hit.position;
+                        
+                        // Give more time
+                        for (int i = 0; i < 5; i++)
+                        {
+                            yield return null;
+                            if (agent.isOnNavMesh) break;
+                        }
+                    }
+                    
+                    if (!agent.isOnNavMesh)
+                    {
+                        agent.enabled = false;
+                        m_isMoving = false;
+                        yield break;
+                    }
+                }
+                
                 agent.SetDestination(destination);
                 
-                // while calculating or more distance than 0.1
                 while (agent.pathPending || agent.remainingDistance > 0.1f)
                 {
                     yield return null;
                 }
+                
+                agent.enabled = false;
             }
 
-            //Fix the position in last step
             transform.position = destination;
 
             CellManager.Instance.ResetAllCellsColors();
