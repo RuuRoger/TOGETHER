@@ -1265,6 +1265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_cellPrefab: {fileID: 7958857298525737277, guid: 25f6fa06dc3c8a540bceb4936d68b842, type: 3}
   m_dogPrefab: {fileID: 2629182449500102118, guid: 15ca4494f24bf9741a48b37ec2c4c632, type: 3}
+  m_humanPrefab: {fileID: 7790311193246825978, guid: fc0aa38a16f1b14438b159068eccb3dc, type: 3}
 --- !u!1 &1482630275
 GameObject:
   m_ObjectHideFlags: 0
