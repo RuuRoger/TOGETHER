@@ -39,7 +39,7 @@ namespace Assets.Scripts.Cells
             - we evalute if is empty o rnot with an overlapbox, catchiong all colliders in area
             - if the collider is diferent about the cell collider and the player, it's not accesible
         */
-        public void ChangeColorAccesibleCells(Vector2 idPlayerCell)
+        public void ChangeColorAccesibleCells(Vector2 idPlayerCell, GameObject selectedPlayer)
         {
             float distanceX = Math.Abs(idPlayerCell.x - IDCell.x);
             float distanceY = Math.Abs(idPlayerCell.y - IDCell.y);
@@ -52,7 +52,8 @@ namespace Assets.Scripts.Cells
 
                 foreach (var collider in colliders)
                 {
-                    if (collider.gameObject != this.gameObject && !collider.CompareTag("DogPlayer"))
+                    // Ignore the self cell collider and the collider of player selected
+                    if (collider.gameObject != this.gameObject && collider.gameObject != selectedPlayer)
                     {
                         hasObstacle = true;
                         break;
@@ -78,7 +79,6 @@ namespace Assets.Scripts.Cells
                 m_isAccesible = false;
                 m_cellRender.material.color = m_greenColour;
             }
-        
         }
 
         public void ResetAllColors()
