@@ -37,27 +37,7 @@ namespace Assets.Scripts.Managers
 
             Vector2 idCell = ReadPlayerIdCell(player);
 
-            // diseable agent
-            NavMeshAgent agent = player.GetComponent<NavMeshAgent>();
-            if (agent != null)
-            {
-                agent.enabled = false;
-            }
-
-            CellManager.Instance.NotifyChangeColorAccesibleCells(idCell);
-            
-            StartCoroutine(EnableAgentAfterBuild(player));
-        }
-
-        private IEnumerator EnableAgentAfterBuild(GameObject player)
-        {
-            yield return null;
-            
-            NavMeshAgent agent = player.GetComponent<NavMeshAgent>();
-            if (agent != null && !agent.enabled)
-            {
-                agent.enabled = true;
-            }
+            CellManager.Instance.NotifyChangeColorAccesibleCells(idCell, player);
         }
 
         public void NotifyToPlayerCellDestination(Vector3 cellDestinationPosition)

@@ -30,11 +30,11 @@ namespace Assets.Scripts.Managers
         ///<summary>
         /// Iterate each cell to players's IDcell
         ///</summary>
-        public void NotifyChangeColorAccesibleCells(Vector2 idPlayerCell)
+        public void NotifyChangeColorAccesibleCells(Vector2 idPlayerCell, GameObject selectedPlayer)
         {
             foreach (var cell in m_cells)
             {
-                cell.ChangeColorAccesibleCells(idPlayerCell);
+                cell.ChangeColorAccesibleCells(idPlayerCell, selectedPlayer);
             }
 
             m_navMeshSurface.BuildNavMesh();
@@ -46,6 +46,8 @@ namespace Assets.Scripts.Managers
             {
                 cell.ResetAllColors();
             }
+            
+            m_navMeshSurface.BuildNavMesh();
         }
 
         public void GetDestinationCellPosition(Vector3 destinationCellPosition)
