@@ -8,6 +8,7 @@ namespace Assets.Scripts.Cells
         // ================================================== FIELDS ==================================================
         [SerializeField] private GameObject m_cellPrefab;
         [SerializeField] private GameObject m_dogPrefab;
+        [SerializeField] private GameObject m_humanPrefab;
 
         // ================================================== PUBLIC METHODS ==================================================
         ///<Summary>
@@ -54,6 +55,13 @@ namespace Assets.Scripts.Cells
             Quaternion dogRotation = Quaternion.Euler(0f, 90f, 0);
             GameObject dogInstantiatePrefab = Instantiate(m_dogPrefab, dogPosition, dogRotation);
             PlayerManager.Instance.GetPlayer();
+
+            //Human
+            Vector3 humanPosition = new(0f, 0.1f, 12f);
+            Quaternion humanROtation = Quaternion.Euler(0f, 90f, 0f);
+            GameObject humanInstantiatePrefab = Instantiate(m_humanPrefab, humanPosition, humanROtation);
+            PlayerManager.Instance.GetPlayer();
+
         }
 
         // ================================================== PRIVATE METHODS ==================================================
