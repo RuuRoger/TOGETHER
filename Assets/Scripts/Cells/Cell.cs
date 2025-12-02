@@ -52,8 +52,13 @@ namespace Assets.Scripts.Cells
 
                 foreach (var collider in colliders)
                 {
-                    // Ignore the self cell collider and the collider of player selected
-                    if (collider.gameObject != this.gameObject && collider.gameObject != selectedPlayer)
+                    // Ignore this kind of colliders
+                    if (
+                        collider.gameObject != this.gameObject && 
+                        collider.gameObject != selectedPlayer && 
+                        !collider.gameObject.CompareTag("Little Points") &&
+                        !collider.gameObject.CompareTag("Big Points")  &&
+                        !collider.gameObject.CompareTag("Bad Points"))
                     {
                         hasObstacle = true;
                         break;
