@@ -10,10 +10,10 @@ namespace Assets.Scripts.Players
     public class BasePlayer : MonoBehaviour
     {
         // ================================================== FIELDS ==================================================
-        private bool m_isSelected = false;
         private bool m_isMoving = false;
 
         // ================================================== PROPERTIES ==================================================
+        private bool m_isSelected = false;
         public bool IsSelected
         {
             get { return m_isSelected; }
