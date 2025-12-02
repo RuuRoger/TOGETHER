@@ -9,6 +9,8 @@ TagManager:
   - DogPlayer
   - CellManager
   - Little Points
+  - Big Points
+  - Bad Points
   layers:
   - Default
   - TransparentFX
