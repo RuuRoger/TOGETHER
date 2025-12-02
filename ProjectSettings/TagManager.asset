@@ -5,14 +5,12 @@ TagManager:
   serializedVersion: 3
   tags:
   - Enemy
-  - Power
-  - BodyEnemy
-  - Fire
-  - Ice
-  - Dark
   - HumanPlayer
   - DogPlayer
   - CellManager
+  - Little Points
+  - Big Points
+  - Bad Points
   layers:
   - Default
   - TransparentFX
