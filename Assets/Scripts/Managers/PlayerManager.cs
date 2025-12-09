@@ -13,6 +13,11 @@ namespace Assets.Scripts.Managers
         public static PlayerManager Instance {get; set;}
 
         // ================================================== PUBLIC METHODS ==================================================
+        
+        ///  <summary>
+        /// Assigns the reference of the GameObject with the BasePlayer script, used for the characters.
+        /// Its use is only for instantiating the character.
+        /// </summary>
         public void GetPlayer()
         {
             if (m_player == null)
@@ -21,6 +26,10 @@ namespace Assets.Scripts.Managers
             }
         }
 
+        /// <summary>
+        /// Identifies the character by its tag, reads the cell ID and then sends this information to change the color of the accessible cells.
+        /// </summary>
+        /// <param name="playerTag">Reads the player's tag to identify the player</param>
         public void PlayerSelected(string playerTag)
         {
             GameObject player = GameObject.FindGameObjectWithTag(playerTag);
@@ -38,6 +47,8 @@ namespace Assets.Scripts.Managers
         }
 
         // ================================================== PRIVATE METHODS ==================================================
+   
+        // Singleton Pattern
         private void Awake()
         {
             if (Instance != null && Instance != this)
