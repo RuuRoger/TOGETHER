@@ -16,6 +16,10 @@ namespace Assets.Scripts.Managers
         public static CellManager Instance {get; set;}
 
         // ================================================== PUBLIC METHODS ==================================================
+        
+        ///<summary>
+        /// Add cells in list
+        /// </summary>
         public void AddCell(Cell cell)
         {
             m_cells.Add(cell);
@@ -34,6 +38,9 @@ namespace Assets.Scripts.Managers
             m_navMeshSurface.BuildNavMesh();
         }
 
+        /// <summary>
+        /// Change all colors to green
+        /// </summary>
         public void ResetAllCellsColors()
         {
             foreach (var cell in m_cells)
@@ -44,6 +51,10 @@ namespace Assets.Scripts.Managers
             m_navMeshSurface.BuildNavMesh();
         }
 
+        /// <summary>
+        /// Select the cell position to player goes
+        /// </summary>
+        /// <param name="destinationCellPosition"> Destination position</param>
         public void GetDestinationCellPosition(Vector3 destinationCellPosition)
         {
             PlayerManager.Instance.NotifyToPlayerCellDestination(destinationCellPosition);
