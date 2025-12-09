@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
-using Assets.Scripts.Cells;
 using UnityEngine;
 using Unity.AI.Navigation;
+using Assets.Scripts.Cells;
 
 
 namespace Assets.Scripts.Managers
@@ -10,16 +9,11 @@ namespace Assets.Scripts.Managers
     public class CellManager : MonoBehaviour
     {
         // ================================================== FIELDS ==================================================
-        private static CellManager m_instance;
         private NavMeshSurface m_navMeshSurface;
         private List<Cell> m_cells = new List<Cell>();
 
         // ================================================== PROPERTIES ==================================================
-        public static CellManager Instance
-        {
-            get { return m_instance; }
-            set { m_instance = value; }
-        }
+        public static CellManager Instance {get; set;}
 
         // ================================================== PUBLIC METHODS ==================================================
         public void AddCell(Cell cell)
