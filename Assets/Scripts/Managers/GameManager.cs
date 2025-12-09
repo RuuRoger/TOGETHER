@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Managers
@@ -10,11 +9,7 @@ namespace Assets.Scripts.Managers
         private static GameManager m_instance;
 
         // ================================================== PROPERTIES ==================================================
-        public static GameManager Instance
-        {
-            get { return m_instance; }
-            set { m_instance = value; }
-        }
+        public static GameManager Instance {get; set;}
 
         // ================================================== PRIVATE METHODS ==================================================
         private void Awake()

@@ -1,5 +1,5 @@
-using Assets.Scripts.Managers;
 using UnityEngine;
+using Assets.Scripts.Managers;
 
 namespace Assets.Scripts.Cells
 {

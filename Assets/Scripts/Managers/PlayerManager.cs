@@ -1,25 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.Players;
 using Assets.Scripts.Cells;
-using UnityEngine.AI;
 
 namespace Assets.Scripts.Managers
 {
     public class PlayerManager : MonoBehaviour
     {
         // ================================================== FIELDS ==================================================
-        private static PlayerManager m_instance;
         private BasePlayer m_player;
 
         // ================================================== PROPERTIES ==================================================
-        public static PlayerManager Instance
-        {
-            get { return m_instance; }
-            set { m_instance = value; }
-        }
+        public static PlayerManager Instance {get; set;}
 
         // ================================================== PUBLIC METHODS ==================================================
         public void GetPlayer()

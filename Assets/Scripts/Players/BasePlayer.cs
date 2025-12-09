@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Assets.Scripts.Managers;
 using UnityEngine.AI;
+using Assets.Scripts.Managers;
 
 namespace Assets.Scripts.Players
 {
@@ -13,17 +11,12 @@ namespace Assets.Scripts.Players
         private bool m_isMoving = false;
 
         // ================================================== PROPERTIES ==================================================
-        private bool m_isSelected = false;
-        public bool IsSelected
-        {
-            get { return m_isSelected; }
-            set { m_isSelected = value; }
-        }
+        public bool IsSelected {get; set;} = false;
 
         // ================================================== PUBLIC METHODS ==================================================
         public void MovePlayerToCell(Vector3 cellDestination)
         {
-            if (m_isSelected && !m_isMoving)
+            if (IsSelected && !m_isMoving)
             {
                 StartCoroutine(MoveToCell(cellDestination));
             }
@@ -32,7 +25,7 @@ namespace Assets.Scripts.Players
         // ================================================== PRIVATE METHODS ==================================================
         private void OnMouseDown()
         {
-            m_isSelected = true;
+            IsSelected = true;
             string playerTag = gameObject.tag;
             PlayerManager.Instance.PlayerSelected(playerTag);
         }
