@@ -1,40 +1,30 @@
 using System;
-using Assets.Scripts.Managers;
 using UnityEngine;
 using Unity.AI.Navigation;
+using Assets.Scripts.Managers;
 
 namespace Assets.Scripts.Cells
 {
     public class Cell : MonoBehaviour
     {
         // ================================================== FIELDS ==================================================
-        private Vector3 m_halfExtents = new Vector3(0.5f, 0.5f, 0.5f);
-        private Vector2 m_idCell;
+        private NavMeshModifier m_naveMeshModifier;
+        private Renderer m_cellRender;
+        private Vector3 m_halfExtents = new Vector3(0.5f, 0.5f, 0.5f); //Using for OverlapBox
         private Color m_greenColour = new(0.4f, 0.7f, 0.2f);
         private Color m_blueColour = new(0.2f, 0.7f, 0.7f);
-        private Renderer m_cellRender;
-        private NavMeshModifier m_naveMeshModifier;
-        private bool m_isAccesible = false;
+        private Vector2 m_idCell;
 
         // ================================================== PROPERTIES ==================================================
-        public Vector2 IDCell
-        {
-            get { return m_idCell; }
-            set { m_idCell = value; }
-        }
-
-        public bool IsAccesible
-        {
-            get { return m_isAccesible; }
-            set { m_isAccesible = value; }
-        }
+        public Vector2 IDCell {get; set;}
+        public bool IsAccesible {get; set;}
 
         // ================================================== PUBLIC METHODS ==================================================
         /*
             Change the cell color if is accesible or not
             - Is necessary the id where player is in that moment
             - with this is possible to calculate the distance between the player's cell and the destination's cell
-            - if the distance is 1 in axis x and y, is accesible
+            - if the distance is 2 in axis x and y, is accesible
             - BUT this cell must be "empty"
             - we evalute if is empty o rnot with an overlapbox, catchiong all colliders in area
             - if the collider is diferent about the cell collider and the player, it's not accesible
@@ -67,13 +57,13 @@ namespace Assets.Scripts.Cells
 
                 if(hasObstacle)
                 {
-                    m_isAccesible = false;
+                    IsAccesible = false;
                     m_cellRender.material.color = m_greenColour;
                     m_naveMeshModifier.area = 1; //Not "walkeable"
                 }
                 else
                 {
-                    m_isAccesible = true;
+                    IsAccesible = true;
                     m_cellRender.material.color = m_blueColour;
                     m_naveMeshModifier.area = 0; // "Walkeable"  
                 }
@@ -81,14 +71,14 @@ namespace Assets.Scripts.Cells
             }
             else
             {
-                m_isAccesible = false;
+                IsAccesible = false;
                 m_cellRender.material.color = m_greenColour;
             }
         }
 
         public void ResetAllColors()
         {
-            m_isAccesible = false;
+            IsAccesible = false;
             m_cellRender.material.color = m_greenColour;
             m_naveMeshModifier.area = 1; //Not "walkeable"
         }
@@ -102,7 +92,7 @@ namespace Assets.Scripts.Cells
 
         private void OnMouseDown()
         {
-            if (!m_isAccesible)
+            if (!IsAccesible)
             {
                 CellManager.Instance.ResetAllCellsColors();
             }
