@@ -5,9 +5,6 @@ namespace Assets.Scripts.Managers
 {
     public class GameManager : MonoBehaviour
     {
-        // ================================================== FIELDS ==================================================
-        private static GameManager m_instance;
-
         // ================================================== PROPERTIES ==================================================
         public static GameManager Instance {get; set;}
 
