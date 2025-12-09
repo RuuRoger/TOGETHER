@@ -14,6 +14,10 @@ namespace Assets.Scripts.Players
         public bool IsSelected {get; set;} = false;
 
         // ================================================== PUBLIC METHODS ==================================================
+        /// <summary>
+        /// Calls coroutine to move the player to the specified cell destination when player is selected but not moving.
+        /// </summary>
+        /// <param name="cellDestination">The target position where the player should move to</param>
         public void MovePlayerToCell(Vector3 cellDestination)
         {
             if (IsSelected && !m_isMoving)
@@ -23,6 +27,9 @@ namespace Assets.Scripts.Players
         }
 
         // ================================================== PRIVATE METHODS ==================================================
+        /// <summary>
+        ///  Let player be selected. Select the tag'splayer
+        /// </summary>
         private void OnMouseDown()
         {
             IsSelected = true;
@@ -30,6 +37,11 @@ namespace Assets.Scripts.Players
             PlayerManager.Instance.PlayerSelected(playerTag);
         }
 
+        /// <summary>
+        /// Coroutine that handles the player movement to a specific destination using NavMeshAgent.
+        /// Manages NavMesh positioning, agent initialization, and movement completion.
+        /// </summary>
+        /// <param name="destination">The target position where the player should move to</param>
         private IEnumerator MoveToCell(Vector3 destination)
         {
             m_isMoving = true;
