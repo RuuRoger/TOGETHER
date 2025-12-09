@@ -13,22 +13,24 @@ namespace Assets.Scripts.Cells
         private Vector3 m_halfExtents = new Vector3(0.5f, 0.5f, 0.5f); //Using for OverlapBox
         private Color m_greenColour = new(0.4f, 0.7f, 0.2f);
         private Color m_blueColour = new(0.2f, 0.7f, 0.7f);
-        private Vector2 m_idCell;
 
         // ================================================== PROPERTIES ==================================================
         public Vector2 IDCell {get; set;}
         public bool IsAccesible {get; set;}
 
         // ================================================== PUBLIC METHODS ==================================================
-        /*
-            Change the cell color if is accesible or not
-            - Is necessary the id where player is in that moment
-            - with this is possible to calculate the distance between the player's cell and the destination's cell
-            - if the distance is 2 in axis x and y, is accesible
-            - BUT this cell must be "empty"
-            - we evalute if is empty o rnot with an overlapbox, catchiong all colliders in area
-            - if the collider is diferent about the cell collider and the player, it's not accesible
-        */
+  
+        /// <summary>
+        /// Change the cell color if is accesible or not
+        /// - Is necessary the id where player is in that moment
+        /// - with this is possible to calculate the distance between the player's cell and the destination's cell
+        /// - if the distance is 2 in axis x and y, is accesible
+        /// - BUT this cell must be "empty"
+        /// - we evalute if is empty o rnot with an overlapbox, catchiong all colliders in area
+        /// - if the collider is diferent about the cell collider and the player, it's not accesible
+        /// </summary>
+        /// <param name="idPlayerCell"> The cell id where player is it</param>
+        /// <param name="selectedPlayer">GameObject Player selected</param>
         public void ChangeColorAccesibleCells(Vector2 idPlayerCell, GameObject selectedPlayer)
         {
             float distanceX = Math.Abs(idPlayerCell.x - IDCell.x);
@@ -76,6 +78,9 @@ namespace Assets.Scripts.Cells
             }
         }
 
+        /// <summary>
+        /// Put the colour cell as green and make it not walkeable
+        /// </summary>
         public void ResetAllColors()
         {
             IsAccesible = false;
