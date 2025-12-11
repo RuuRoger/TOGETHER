@@ -30,9 +30,16 @@ namespace Assets.Scripts.Managers
         ///</summary>
         public void NotifyChangeColorAccesibleCells(Vector2 idPlayerCell, GameObject selectedPlayer)
         {
+            // Evaluate all cells
             foreach (var cell in m_cells)
             {
                 cell.ChangeColorAccesibleCells(idPlayerCell, selectedPlayer);
+            }
+
+            // Delete not accesible
+            foreach (var cell in m_cells)
+            {
+                cell.CheckIsolatedCell();
             }
 
             m_navMeshSurface.BuildNavMesh();
@@ -58,6 +65,26 @@ namespace Assets.Scripts.Managers
         public void GetDestinationCellPosition(Vector3 destinationCellPosition)
         {
             PlayerManager.Instance.NotifyToPlayerCellDestination(destinationCellPosition);
+        }
+
+        public List<Cell> GetAccessibleCells(Vector2 idCell)
+        {
+            List<Cell> activeCells = new List<Cell>();
+            
+            foreach (Cell cell in m_cells)
+            {
+                bool isNeighbor = (
+                    (cell.IDCell.x == idCell.x && Mathf.Abs(cell.IDCell.y - idCell.y) == 1) ||
+                    (cell.IDCell.y == idCell.y && Mathf.Abs(cell.IDCell.x - idCell.x) == 1)
+                );
+                
+                if (isNeighbor && cell.IsAccesible)
+                {
+                    activeCells.Add(cell);
+                }
+            }
+            
+            return activeCells;
         }
 
         // ================================================== PRIVATE METHODS ==================================================
