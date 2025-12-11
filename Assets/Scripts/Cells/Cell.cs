@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Unity.AI.Navigation;
 using Assets.Scripts.Managers;
@@ -44,7 +45,6 @@ namespace Assets.Scripts.Cells
 
                 foreach (var collider in colliders)
                 {
-                    // Ignore this kind of colliders
                     if (
                         collider.gameObject != this.gameObject && 
                         collider.gameObject != selectedPlayer && 
@@ -61,15 +61,14 @@ namespace Assets.Scripts.Cells
                 {
                     IsAccesible = false;
                     m_cellRender.material.color = m_greenColour;
-                    m_naveMeshModifier.area = 1; //Not "walkeable"
+                    m_naveMeshModifier.area = 1; //Not walkeable
                 }
                 else
                 {
                     IsAccesible = true;
                     m_cellRender.material.color = m_blueColour;
-                    m_naveMeshModifier.area = 0; // "Walkeable"  
+                    m_naveMeshModifier.area = 0; // Walkeable
                 }
-
             }
             else
             {
@@ -86,6 +85,23 @@ namespace Assets.Scripts.Cells
             IsAccesible = false;
             m_cellRender.material.color = m_greenColour;
             m_naveMeshModifier.area = 1; //Not "walkeable"
+        }
+
+        /// <summary>
+        /// Checks if this cell is isolated (no accessible neighbors) and marks it as not accessible
+        /// </summary>
+        public void CheckIsolatedCell()
+        {
+            if (IsAccesible)
+            {
+                List<Cell> neighbours = CellManager.Instance.GetAccessibleCells(IDCell);
+                if (neighbours.Count == 0)
+                {
+                    IsAccesible = false;
+                    m_cellRender.material.color = m_greenColour;
+                    m_naveMeshModifier.area = 1;  //Not Walkeable
+                }
+            }
         }
 
         // ================================================== PRIVATE METHODS ==================================================
