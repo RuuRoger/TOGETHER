@@ -87,6 +87,35 @@ namespace Assets.Scripts.Managers
             return activeCells;
         }
 
+        public List<Cell> GetCellsWithOutObstacles()
+        {
+            List<Cell> emptyCells = new List<Cell>();
+            Vector3 halfExtents = new Vector3(0.5f, 0.5f, 0.5f);
+
+            foreach (Cell cell in m_cells)
+            {
+                Vector3 boxCenter = cell.transform.position + Vector3.up * 0.5f;
+                Collider[] colliders = Physics.OverlapBox(boxCenter, halfExtents);
+
+                bool isEmpty = true;
+                foreach(var collider in colliders)
+                {
+                    if (collider.gameObject != cell.gameObject)
+                    {
+                        isEmpty = false;
+                        break;
+                    }
+                }
+
+                if (isEmpty)
+                {
+                    emptyCells.Add(cell);
+                }
+            }
+
+            return emptyCells;
+        }
+
         // ================================================== PRIVATE METHODS ==================================================
         private void Awake()
         {
