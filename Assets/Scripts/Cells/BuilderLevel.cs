@@ -1,6 +1,7 @@
 using UnityEngine;
-using Assets.Scripts.Managers;
 using System.Collections.Generic;
+using Assets.Scripts.Managers;
+using Assets.Scripts.Collectables;
 
 namespace Assets.Scripts.Cells
 {
@@ -14,13 +15,18 @@ namespace Assets.Scripts.Cells
         [SerializeField] private GameObject m_spherePrefabDog;
         [SerializeField] private GameObject m_spherePrefabHuman;
 
+        // ================================================== EVENTS ==================================================
+        private void OnEnable()
+        {
+            Collectable1.OnCollected += InstantiateOneCollectible;
+        }
+
         // ================================================== PUBLIC METHODS ==================================================
         ///<Summary>
         /// Create a grid
         /// For each cell created, make an ID cell
         /// Also, add every cell in a list in CellManager
         ///</Summary
-        
         public void MakeLevel()
         {
             int i = 1; // row
@@ -52,7 +58,11 @@ namespace Assets.Scripts.Cells
             }
         }
 
-        public void InstantiateCharactersAndObjects()
+        /// <summary>
+        /// Instantiate in scene every Player
+        /// Later, call the method to insanteate collectables
+        /// </summary>
+        public void InstantiateCharacters()
         {
             // Dog
             Vector3 dogPosition = new(0f, 0.1f, 10f);
@@ -66,6 +76,21 @@ namespace Assets.Scripts.Cells
 
             PlayerManager.Instance.GetPlayer();
 
+            InstantiateAllCollectables();
+        }
+
+        // ================================================== PRIVATE METHODS ==================================================
+        private void Start()
+        {
+            MakeLevel();
+            InstantiateCharacters();
+        }
+
+        /// <summary>
+        /// Instantiate the collectables
+        /// </summary>
+        private void InstantiateAllCollectables()
+        {
             // Collectables
             List<Cell> emptyCells = CellManager.Instance.GetCellsWithOutObstacles();
 
@@ -93,11 +118,45 @@ namespace Assets.Scripts.Cells
             }
         }
 
-        // ================================================== PRIVATE METHODS ==================================================
-        private void Start()
+        /// <summary>
+        /// Instantiate a specific collectable. Recives a tag and depending its value, calls and collectable or another
+        /// </summary>
+        /// <param name="colletableTag"></param>
+        private void InstantiateOneCollectible(string colletableTag)
         {
-            MakeLevel();
-            InstantiateCharactersAndObjects();
+            // Collectables
+            List<Cell> emptyCells = CellManager.Instance.GetCellsWithOutObstacles();
+
+            if (colletableTag == "Together Points")
+            {
+                Debug.Log($"Se ha cogido la bola con etiqueta: {colletableTag}");
+                int randomIndex1 = Random.Range(0, emptyCells.Count);
+                Cell cell1 = emptyCells[randomIndex1];
+                Vector3 position1 = new(cell1.transform.position.x, 0.5f, cell1.transform.position.z);
+                Instantiate(m_spherePrefabTogether, position1, Quaternion.identity);
+                emptyCells.RemoveAt(randomIndex1);
+            }
+
+            if (colletableTag == "Dog Points")
+            {
+                Debug.Log($"Se ha cogido la bola con etiqueta: {colletableTag}");
+                // Dog sphere
+                int randomIndex2 = Random.Range(0, emptyCells.Count);
+                Cell cell2 = emptyCells[randomIndex2];
+                Vector3 position2 = new(cell2.transform.position.x, 0.5f, cell2.transform.position.z);
+                Instantiate(m_spherePrefabDog, position2, Quaternion.identity);
+                emptyCells.RemoveAt(randomIndex2);
+            }
+
+            if (colletableTag == "Player Points")
+            {
+                Debug.Log($"Se ha cogido la bola con etiqueta: {colletableTag}");
+                // Human sphere
+                int randomIndex3 = Random.Range(0, emptyCells.Count);
+                Cell cell3 = emptyCells[randomIndex3];
+                Vector3 position3 = new(cell3.transform.position.x, 0.5f, cell3.transform.position.z);
+                Instantiate(m_spherePrefabHuman, position3, Quaternion.identity);
+            }
         }
     }
 }
