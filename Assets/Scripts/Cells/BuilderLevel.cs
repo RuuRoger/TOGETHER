@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Managers;
 using Assets.Scripts.Collectables;
@@ -122,14 +123,21 @@ namespace Assets.Scripts.Cells
         /// Instantiate a specific collectable. Recives a tag and depending its value, calls and collectable or another
         /// </summary>
         /// <param name="colletableTag"></param>
+        
         private void InstantiateOneCollectible(string colletableTag)
         {
+            StartCoroutine(InstantiateOneCollectibleCoroutine(colletableTag));
+        }
+
+        private IEnumerator InstantiateOneCollectibleCoroutine(string colletableTag)
+        {
+            yield return new WaitForSeconds(1f);
+
             // Collectables
             List<Cell> emptyCells = CellManager.Instance.GetCellsWithOutObstacles();
 
             if (colletableTag == "Together Points")
             {
-                Debug.Log($"Se ha cogido la bola con etiqueta: {colletableTag}");
                 int randomIndex1 = Random.Range(0, emptyCells.Count);
                 Cell cell1 = emptyCells[randomIndex1];
                 Vector3 position1 = new(cell1.transform.position.x, 0.5f, cell1.transform.position.z);
@@ -139,7 +147,6 @@ namespace Assets.Scripts.Cells
 
             if (colletableTag == "Dog Points")
             {
-                Debug.Log($"Se ha cogido la bola con etiqueta: {colletableTag}");
                 // Dog sphere
                 int randomIndex2 = Random.Range(0, emptyCells.Count);
                 Cell cell2 = emptyCells[randomIndex2];
@@ -150,7 +157,6 @@ namespace Assets.Scripts.Cells
 
             if (colletableTag == "Player Points")
             {
-                Debug.Log($"Se ha cogido la bola con etiqueta: {colletableTag}");
                 // Human sphere
                 int randomIndex3 = Random.Range(0, emptyCells.Count);
                 Cell cell3 = emptyCells[randomIndex3];
