@@ -48,9 +48,9 @@ namespace Assets.Scripts.Cells
                     if (
                         collider.gameObject != this.gameObject && 
                         collider.gameObject != selectedPlayer && 
-                        !collider.gameObject.CompareTag("Little Points") &&
-                        !collider.gameObject.CompareTag("Big Points")  &&
-                        !collider.gameObject.CompareTag("Bad Points"))
+                        !collider.gameObject.CompareTag("Dog Points") &&
+                        !collider.gameObject.CompareTag("Player Points")  &&
+                        !collider.gameObject.CompareTag("Together Points"))
                     {
                         hasObstacle = true;
                         break;
