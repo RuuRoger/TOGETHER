@@ -8,9 +8,12 @@ TagManager:
   - HumanPlayer
   - DogPlayer
   - CellManager
-  - Little Points
-  - Big Points
-  - Bad Points
+  - Fire
+  - Dark
+  - Ice
+  - Dog Points
+  - Player Points
+  - Together Points
   layers:
   - Default
   - TransparentFX
