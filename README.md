@@ -3,13 +3,14 @@
 
 ## 📝 Description
 
-A 3D top-down adventure game, where you explore a world with your character and their faithful canine companion. The main objective is to offer an experience of exploration and collaboration between the player and their dog.
+A turn-based game featuring grid movement. Players must collect their sphere to score! 
+- The Purple sphere grants points to both players.
+- Blue sphere add points to dog
+- Yello sphere add points to human
 
-## ❔ Want more info?
-Take a look at my devlog about this project!
+⚠️ **Warchout!**
+If you grab the wrong sphere, you lose points, and if you have less than 0, you lose the game
 
-https://ruuroger.itch.io/together/devlog/1003567/first-steps
+## 🚀 Project for Escuela Musk 
 
-## 🚀 Project Status
 
-This project is currently **In progress** 🚧
