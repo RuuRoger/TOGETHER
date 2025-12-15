@@ -11,6 +11,6 @@ A turn-based game featuring grid movement. Players must collect their sphere to 
 ⚠️ **Warchout!**
 If you grab the wrong sphere, you lose points, and if you have less than 0, you lose the game
 
-## 🚀 Project for Escuela Musk 
+**🚀 Project for Escuela Musk** 
 
 
