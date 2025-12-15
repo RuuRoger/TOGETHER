@@ -16,12 +16,6 @@ namespace Assets.Scripts.Cells
         [SerializeField] private GameObject m_spherePrefabDog;
         [SerializeField] private GameObject m_spherePrefabHuman;
 
-        // ================================================== EVENTS ==================================================
-        private void OnEnable()
-        {
-            Collectable1.OnCollected += InstantiateOneCollectible;
-        }
-
         // ================================================== PUBLIC METHODS ==================================================
         ///<Summary>
         /// Create a grid
@@ -111,52 +105,6 @@ namespace Assets.Scripts.Cells
                 Instantiate(m_spherePrefabDog, position2, Quaternion.identity);
                 emptyCells.RemoveAt(randomIndex2);
 
-                // Human sphere
-                int randomIndex3 = Random.Range(0, emptyCells.Count);
-                Cell cell3 = emptyCells[randomIndex3];
-                Vector3 position3 = new(cell3.transform.position.x, 0.5f, cell3.transform.position.z);
-                Instantiate(m_spherePrefabHuman, position3, Quaternion.identity);
-            }
-        }
-
-        /// <summary>
-        /// Instantiate a specific collectable. Recives a tag and depending its value, calls and collectable or another
-        /// </summary>
-        /// <param name="colletableTag"></param>
-        
-        private void InstantiateOneCollectible(string colletableTag)
-        {
-            StartCoroutine(InstantiateOneCollectibleCoroutine(colletableTag));
-        }
-
-        private IEnumerator InstantiateOneCollectibleCoroutine(string colletableTag)
-        {
-            yield return new WaitForSeconds(1f);
-
-            // Collectables
-            List<Cell> emptyCells = CellManager.Instance.GetCellsWithOutObstacles();
-
-            if (colletableTag == "Together Points")
-            {
-                int randomIndex1 = Random.Range(0, emptyCells.Count);
-                Cell cell1 = emptyCells[randomIndex1];
-                Vector3 position1 = new(cell1.transform.position.x, 0.5f, cell1.transform.position.z);
-                Instantiate(m_spherePrefabTogether, position1, Quaternion.identity);
-                emptyCells.RemoveAt(randomIndex1);
-            }
-
-            if (colletableTag == "Dog Points")
-            {
-                // Dog sphere
-                int randomIndex2 = Random.Range(0, emptyCells.Count);
-                Cell cell2 = emptyCells[randomIndex2];
-                Vector3 position2 = new(cell2.transform.position.x, 0.5f, cell2.transform.position.z);
-                Instantiate(m_spherePrefabDog, position2, Quaternion.identity);
-                emptyCells.RemoveAt(randomIndex2);
-            }
-
-            if (colletableTag == "Player Points")
-            {
                 // Human sphere
                 int randomIndex3 = Random.Range(0, emptyCells.Count);
                 Cell cell3 = emptyCells[randomIndex3];
