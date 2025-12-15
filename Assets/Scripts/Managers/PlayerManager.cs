@@ -18,8 +18,8 @@ namespace Assets.Scripts.Managers
 
         // ================================================== PROPERTIES ==================================================
         public static PlayerManager Instance {get; set;}
-        public int PlayerPoints {get; set;}
-        public int DogPlayerPoints {get;set;}
+        public static int PlayerPoints {get; set;}
+        public static int DogPlayerPoints {get;set;}
     
 
         // ================================================== EVENTS ==================================================
