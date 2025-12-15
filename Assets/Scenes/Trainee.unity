@@ -966,6 +966,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e53f36425859c4cb2ccf696b85b7ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Managers.PlayerManager
+  m_spherePrefabTogether: {fileID: 4763932323395400373, guid: c2b6737daec969342bf6487b7fe2cf27, type: 3}
+  m_spherePrefabDog: {fileID: 4763932323395400373, guid: 5fa72c38e58724e4081fe3920a6ecefe, type: 3}
+  m_spherePrefabHuman: {fileID: 4763932323395400373, guid: 790d79296ec1ac84ab366be0d8dfbbbd, type: 3}
 --- !u!1 &859701103
 GameObject:
   m_ObjectHideFlags: 0
