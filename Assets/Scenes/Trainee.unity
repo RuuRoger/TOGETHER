@@ -2898,6 +2898,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Managers.UIManager
   m_textLivesHuman: {fileID: 451668855}
   m_textLivesDog: {fileID: 240066131}
+  m_textWin: {fileID: 1777047271}
+  m_textLose: {fileID: 1066120357}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
