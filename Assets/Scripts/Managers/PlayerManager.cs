@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,13 +15,16 @@ namespace Assets.Scripts.Managers
         [SerializeField] private GameObject m_spherePrefabDog;
         [SerializeField] private GameObject m_spherePrefabHuman;
         private BasePlayer m_player;
-        private int m_playerLives;
-        private int m_dogPlayerLives;
 
         // ================================================== PROPERTIES ==================================================
         public static PlayerManager Instance {get; set;}
+        public int PlayerLives {get; set;}
+        public int DogPlayerLives {get;set;}
+    
 
         // ================================================== EVENTS ==================================================
+        public static event Action<string, int> OnPoints;
+        
         private void OnEnable()
         {
             Collectable1.OnCollected += InstantiateOneCollectible;
@@ -76,11 +80,8 @@ namespace Assets.Scripts.Managers
 
         private void Start()
         {
-            m_playerLives = 0;
-            m_dogPlayerLives = 0;
-
-            Debug.Log($"Vidas humano: {m_playerLives}");
-            Debug.Log($"Vidas perro: {m_dogPlayerLives}");
+            PlayerLives = 0;
+            DogPlayerLives = 0;
         }
 
         private Vector2 ReadPlayerIdCell(GameObject player)
@@ -118,32 +119,28 @@ namespace Assets.Scripts.Managers
             {
                 if (playerTag == "DogPlayer")
                 {
-                    m_dogPlayerLives ++;
-                    Debug.Log($"Vidas humano: {m_playerLives}");
-                    Debug.Log($"Vidas perro: {m_dogPlayerLives}");
+                    DogPlayerLives ++;
+                    OnPoints?.Invoke(playerTag, DogPlayerLives);
                 }
 
                 if (playerTag == "Player")
                 {
-                    m_playerLives ++;
-                    Debug.Log($"Vidas humano: {m_playerLives}");
-                    Debug.Log($"Vidas perro: {m_dogPlayerLives}");
+                    PlayerLives ++;
+                    OnPoints?.Invoke(playerTag, PlayerLives);
                 }
             }
             else
             {
                 if (playerTag == "DogPlayer")
                 {
-                    m_dogPlayerLives --;
-                    Debug.Log($"Vidas humano: {m_playerLives}");
-                    Debug.Log($"Vidas perro: {m_dogPlayerLives}");
+                    DogPlayerLives --;
+                    OnPoints?.Invoke(playerTag, DogPlayerLives);
                 }
 
                 if (playerTag == "Player")
                 {
-                    m_playerLives --;
-                    Debug.Log($"Vidas humano: {m_playerLives}");
-                    Debug.Log($"Vidas perro: {m_dogPlayerLives}");
+                    PlayerLives --;
+                    OnPoints?.Invoke(playerTag, PlayerLives);
                 }
             }
 
@@ -154,7 +151,7 @@ namespace Assets.Scripts.Managers
 
             if (colletableTag == "Together Points")
             {
-                int randomIndex1 = Random.Range(0, emptyCells.Count);
+                int randomIndex1 = UnityEngine.Random.Range(0, emptyCells.Count);
                 Cell cell1 = emptyCells[randomIndex1];
                 Vector3 position1 = new(cell1.transform.position.x, 0.5f, cell1.transform.position.z);
                 Instantiate(m_spherePrefabTogether, position1, Quaternion.identity);
@@ -164,7 +161,7 @@ namespace Assets.Scripts.Managers
             if (colletableTag == "Dog Points")
             {
                 // Dog sphere
-                int randomIndex2 = Random.Range(0, emptyCells.Count);
+                int randomIndex2 = UnityEngine.Random.Range(0, emptyCells.Count);
                 Cell cell2 = emptyCells[randomIndex2];
                 Vector3 position2 = new(cell2.transform.position.x, 0.5f, cell2.transform.position.z);
                 Instantiate(m_spherePrefabDog, position2, Quaternion.identity);
@@ -174,7 +171,7 @@ namespace Assets.Scripts.Managers
             if (colletableTag == "Player Points")
             {
                 // Human sphere
-                int randomIndex3 = Random.Range(0, emptyCells.Count);
+                int randomIndex3 = UnityEngine.Random.Range(0, emptyCells.Count);
                 Cell cell3 = emptyCells[randomIndex3];
                 Vector3 position3 = new(cell3.transform.position.x, 0.5f, cell3.transform.position.z);
                 Instantiate(m_spherePrefabHuman, position3, Quaternion.identity);
