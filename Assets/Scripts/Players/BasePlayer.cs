@@ -13,6 +13,12 @@ namespace Assets.Scripts.Players
         // ================================================== PROPERTIES ==================================================
         public bool IsSelected {get; set;} = false;
 
+        // ================================================== EVENTS ==================================================
+        private void OnEnable()
+        {
+            UIManager.OnFinishGame += OnDestroy;
+        }
+
         // ================================================== PUBLIC METHODS ==================================================
         /// <summary>
         /// Calls coroutine to move the player to the specified cell destination when player is selected but not moving.
@@ -35,6 +41,12 @@ namespace Assets.Scripts.Players
             IsSelected = true;
             string playerTag = gameObject.tag;
             PlayerManager.Instance.PlayerSelected(playerTag);
+        }
+
+        private void OnDestroy()
+        {
+            Destroy(gameObject);
+            CellManager.Instance.ResetAllCellsColors();
         }
 
         /// <summary>
