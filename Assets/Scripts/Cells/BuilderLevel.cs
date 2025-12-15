@@ -1,5 +1,8 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 using Assets.Scripts.Managers;
+using Assets.Scripts.Collectables;
 
 namespace Assets.Scripts.Cells
 {
@@ -9,6 +12,9 @@ namespace Assets.Scripts.Cells
         [SerializeField] private GameObject m_cellPrefab;
         [SerializeField] private GameObject m_dogPrefab;
         [SerializeField] private GameObject m_humanPrefab;
+        [SerializeField] private GameObject m_spherePrefabTogether;
+        [SerializeField] private GameObject m_spherePrefabDog;
+        [SerializeField] private GameObject m_spherePrefabHuman;
 
         // ================================================== PUBLIC METHODS ==================================================
         ///<Summary>
@@ -16,7 +22,6 @@ namespace Assets.Scripts.Cells
         /// For each cell created, make an ID cell
         /// Also, add every cell in a list in CellManager
         ///</Summary
-        
         public void MakeLevel()
         {
             int i = 1; // row
@@ -48,26 +53,64 @@ namespace Assets.Scripts.Cells
             }
         }
 
-        public void InstantiateCharactersAndObjects()
+        /// <summary>
+        /// Instantiate in scene every Player
+        /// Later, call the method to insanteate collectables
+        /// </summary>
+        public void InstantiateCharacters()
         {
-            //Dog
+            // Dog
             Vector3 dogPosition = new(0f, 0.1f, 10f);
             Quaternion dogRotation = Quaternion.Euler(0f, 90f, 0);
             GameObject dogInstantiatePrefab = Instantiate(m_dogPrefab, dogPosition, dogRotation);
 
-            //Human
+            // Human
             Vector3 humanPosition = new(0f, 0.1f, 12f);
             Quaternion humanROtation = Quaternion.Euler(0f, 90f, 0f);
             GameObject humanInstantiatePrefab = Instantiate(m_humanPrefab, humanPosition, humanROtation);
 
             PlayerManager.Instance.GetPlayer();
+
+            InstantiateAllCollectables();
         }
 
         // ================================================== PRIVATE METHODS ==================================================
         private void Start()
         {
             MakeLevel();
-            InstantiateCharactersAndObjects();
+            InstantiateCharacters();
+        }
+
+        /// <summary>
+        /// Instantiate the collectables
+        /// </summary>
+        private void InstantiateAllCollectables()
+        {
+            // Collectables
+            List<Cell> emptyCells = CellManager.Instance.GetCellsWithOutObstacles();
+
+            if (emptyCells.Count >= 3)
+            {
+                // Together sphere
+                int randomIndex1 = Random.Range(0, emptyCells.Count);
+                Cell cell1 = emptyCells[randomIndex1];
+                Vector3 position1 = new(cell1.transform.position.x, 0.5f, cell1.transform.position.z);
+                Instantiate(m_spherePrefabTogether, position1, Quaternion.identity);
+                emptyCells.RemoveAt(randomIndex1);
+
+                // Dog sphere
+                int randomIndex2 = Random.Range(0, emptyCells.Count);
+                Cell cell2 = emptyCells[randomIndex2];
+                Vector3 position2 = new(cell2.transform.position.x, 0.5f, cell2.transform.position.z);
+                Instantiate(m_spherePrefabDog, position2, Quaternion.identity);
+                emptyCells.RemoveAt(randomIndex2);
+
+                // Human sphere
+                int randomIndex3 = Random.Range(0, emptyCells.Count);
+                Cell cell3 = emptyCells[randomIndex3];
+                Vector3 position3 = new(cell3.transform.position.x, 0.5f, cell3.transform.position.z);
+                Instantiate(m_spherePrefabHuman, position3, Quaternion.identity);
+            }
         }
     }
 }
