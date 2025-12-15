@@ -18,8 +18,8 @@ namespace Assets.Scripts.Managers
 
         // ================================================== PROPERTIES ==================================================
         public static PlayerManager Instance {get; set;}
-        public int PlayerLives {get; set;}
-        public int DogPlayerLives {get;set;}
+        public int PlayerPoints {get; set;}
+        public int DogPlayerPoints {get;set;}
     
 
         // ================================================== EVENTS ==================================================
@@ -80,8 +80,8 @@ namespace Assets.Scripts.Managers
 
         private void Start()
         {
-            PlayerLives = 0;
-            DogPlayerLives = 0;
+            PlayerPoints = 0;
+            DogPlayerPoints = 0;
         }
 
         private Vector2 ReadPlayerIdCell(GameObject player)
@@ -119,28 +119,28 @@ namespace Assets.Scripts.Managers
             {
                 if (playerTag == "DogPlayer")
                 {
-                    DogPlayerLives ++;
-                    OnPoints?.Invoke(playerTag, DogPlayerLives);
+                    DogPlayerPoints ++;
+                    OnPoints?.Invoke(playerTag, DogPlayerPoints);
                 }
 
                 if (playerTag == "Player")
                 {
-                    PlayerLives ++;
-                    OnPoints?.Invoke(playerTag, PlayerLives);
+                    PlayerPoints ++;
+                    OnPoints?.Invoke(playerTag, PlayerPoints);
                 }
             }
             else
             {
                 if (playerTag == "DogPlayer")
                 {
-                    DogPlayerLives --;
-                    OnPoints?.Invoke(playerTag, DogPlayerLives);
+                    DogPlayerPoints --;
+                    OnPoints?.Invoke(playerTag, DogPlayerPoints);
                 }
 
                 if (playerTag == "Player")
                 {
-                    PlayerLives --;
-                    OnPoints?.Invoke(playerTag, PlayerLives);
+                    PlayerPoints --;
+                    OnPoints?.Invoke(playerTag, PlayerPoints);
                 }
             }
 
